@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container" style="max-width: 600px; margin-top: 100px;">
+    <div class="card">
+        <div class="card-header text-center">
+            <h4>Home Page</h4>
+        </div>
+        <div class="card-body text-center">
+            <p>
+                <a href="/login" class="btn btn-primary w-100 mb-2">Login</a>
+            </p>
+            <p>
+                <a href="/user/list" class="btn btn-secondary w-100">User Management</a>
+            </p>
+        </div>
+        <div th:if="${param.logout}">
+            <p style="color: green;" th:text="Bye"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
