@@ -3,7 +3,7 @@ package com.PoseidonCapitalSolutions.TradingApp.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -16,7 +16,7 @@ public class CurvePoint {
     private Integer id;
 
     @Column(name = "as_of_date")
-    private Instant asOfDate;
+    private LocalDateTime asOfDate;
 
     @Column(name = "term")
     private Double term;
@@ -25,6 +25,6 @@ public class CurvePoint {
     private Double value;
 
     @Column(name = "creation_date")
-    private Instant creationDate;
+    private LocalDateTime creationDate;
 
 }

@@ -2,13 +2,17 @@ package com.PoseidonCapitalSolutions.TradingApp.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @Entity
 @Table(name = "bidlist")
-public class BidList {
+public class BidList extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +41,7 @@ public class BidList {
     private String benchmark;
 
     @Column(name = "bid_list_date")
-    private Instant bidListDate;
+    private LocalDateTime bidListDate;
 
     @Column(name = "commentary", length = 125)
     private String commentary;
@@ -53,18 +57,6 @@ public class BidList {
 
     @Column(name = "book", length = 125)
     private String book;
-
-    @Column(name = "creation_name", length = 125)
-    private String creationName;
-
-    @Column(name = "creation_date")
-    private Instant creationDate;
-
-    @Column(name = "revision_name", length = 125)
-    private String revisionName;
-
-    @Column(name = "revision_date")
-    private Instant revisionDate;
 
     @Column(name = "deal_name", length = 125)
     private String dealName;
