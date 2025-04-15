@@ -28,8 +28,8 @@ public class UserController {
     }
 
     @GetMapping("/add")
-    public String addUser(User bid) {
-
+    public String addUser(Model model, User user) {
+        model.addAttribute("user", user);
         return "user/add";
     }
 
@@ -76,7 +76,9 @@ public class UserController {
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id,
                              Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+
         userRepository.delete(user);
         model.addAttribute("users", userRepository.findAll());
         return "redirect:/user/list";
