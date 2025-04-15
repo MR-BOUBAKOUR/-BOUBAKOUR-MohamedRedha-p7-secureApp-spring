@@ -18,8 +18,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public User findById(Integer id) {
+    public UserDTO findById(Integer id) {
         return userRepository.findById(id)
+                .map(userMapper::toUserDTO)
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid user id: " + id));
     }
 

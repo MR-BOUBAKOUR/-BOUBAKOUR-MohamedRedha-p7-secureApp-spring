@@ -46,8 +46,10 @@
 					<td th:text="${trade.type}"></td>
 					<td th:text="${trade.buyQuantity}"></td>
 					<td style="width: 15%" class="text-center">
-						<a th:href="@{/trade/update/{id}(id=${trade.id})}">Edit</a>&nbsp;|&nbsp;
-						<a th:href="@{/trade/delete/{id}(id=${trade.id})}">Delete</a>
+						<a th:href="@{/trade/update/{id}(id=${trade.id})}">Edit</a>
+						<span sec:authorize="hasAuthority('ADMIN')">
+						&nbsp;|&nbsp;<a th:href="@{/trade/delete/{id}(id=${trade.id})}">Delete</a>
+						</span>
 					</td>
 				</tr>
 			</tbody>
