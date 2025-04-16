@@ -6,6 +6,7 @@ import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundExcepti
 import com.PoseidonCapitalSolutions.TradingApp.mapper.TradeMapper;
 import com.PoseidonCapitalSolutions.TradingApp.repositorie.TradeRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +46,7 @@ public class TradeService {
     }
 
     @Transactional
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(Integer id) {
         tradeRepository.deleteById(id);
     }

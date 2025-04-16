@@ -6,6 +6,7 @@ import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundExcepti
 import com.PoseidonCapitalSolutions.TradingApp.mapper.BidListMapper;
 import com.PoseidonCapitalSolutions.TradingApp.repositorie.BidListRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +46,7 @@ public class BidListService {
     }
 
     @Transactional
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(Integer id) {
         bidListRepository.deleteById(id);
     }

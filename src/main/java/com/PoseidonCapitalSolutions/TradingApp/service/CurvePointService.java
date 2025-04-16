@@ -6,6 +6,7 @@ import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundExcepti
 import com.PoseidonCapitalSolutions.TradingApp.mapper.CurvePointMapper;
 import com.PoseidonCapitalSolutions.TradingApp.repositorie.CurvePointRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +46,7 @@ public class CurvePointService {
     }
 
     @Transactional
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(Integer id) {
         curvePointRepository.deleteById(id);
     }
