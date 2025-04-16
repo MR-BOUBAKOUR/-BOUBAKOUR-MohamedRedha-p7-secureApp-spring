@@ -28,6 +28,6 @@ public class LoginController {
     @GetMapping("/error")
     public String error403(Model model) {
         model.addAttribute("errorMsg", "You are not authorized for the requested data.");
-        return "403";
+        return "error";
     }
 }

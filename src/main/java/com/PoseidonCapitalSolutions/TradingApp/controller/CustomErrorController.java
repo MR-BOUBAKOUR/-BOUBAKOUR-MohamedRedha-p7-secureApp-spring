@@ -10,6 +10,6 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError() {
-        return "403";
+        return "error";
     }
 }

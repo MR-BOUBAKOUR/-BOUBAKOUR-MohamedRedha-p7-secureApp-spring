@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Erreur</title>
+</head>
+<body>
+<h3>Une erreur s'est produite.</h3>
+
+<div>
+    <p th:if="${errorStatus != null}"><strong>Statut:</strong> <span th:text="${errorStatus}">Statut</span></p>
+    <p th:if="${errorMessage != null}"><strong>Message:</strong> <span th:text="${errorMessage}">Message</span></p>
+    <p th:if="${errorTimestamp != null}"><strong>Timestamp:</strong> <span th:text="${errorTimestamp}">Timestamp</span></p>
+</div>
+
+<div>
+    Utilisateur connecté: <span sec:authentication="name"></span>
+    <form th:action="@{/app-logout}" method="POST">
+        <input type="submit" value="Déconnexion"/>
+    </form>
+</div>
+
+<p><a th:href="@{/}">Retour à l'accueil</a></p>
+</body>
+</html>

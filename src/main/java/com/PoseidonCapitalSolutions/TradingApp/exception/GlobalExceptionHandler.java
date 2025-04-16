@@ -1,12 +1,12 @@
 package com.PoseidonCapitalSolutions.TradingApp.exception;
 
-import com.PoseidonCapitalSolutions.TradingApp.dto.ErrorResponseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.Instant;
 
@@ -16,17 +16,26 @@ public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponseDTO> handleResourceNotFoundException(ResourceNotFoundException ex) {
-
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleResourceNotFoundException(ResourceNotFoundException ex, Model model) {
         logger.error(ex.getMessage());
 
-        ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(
-                HttpStatus.NOT_FOUND.toString(),
-                ex.getMessage(),
-                Instant.now()
-        );
+        model.addAttribute("errorStatus", HttpStatus.NOT_FOUND.toString());
+        model.addAttribute("errorMessage", ex.getMessage());
+        model.addAttribute("errorTimestamp", Instant.now());
 
-        return new ResponseEntity<>(errorResponseDTO, HttpStatus.NOT_FOUND);
+        return "error";
     }
 
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleGenericException(Exception ex, Model model) {
+        logger.error("Erreur non gérée: ", ex);
+
+        model.addAttribute("errorStatus", HttpStatus.INTERNAL_SERVER_ERROR.toString());
+        model.addAttribute("errorMessage", ex.getMessage());
+        model.addAttribute("errorTimestamp", Instant.now());
+
+        return "error";
+    }
 }
