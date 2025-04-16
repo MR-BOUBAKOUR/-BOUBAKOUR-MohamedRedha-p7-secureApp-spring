@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -61,12 +62,15 @@ public class UserService {
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     public void delete(Integer id) {
 
-        boolean isLastAdmin = userRepository.findAll().stream()
-                .filter(u -> "ADMIN".equals(u.getRole()))
-                .count() == 1;
+        User userToDelete = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid user id: " + id));
 
-        if (isLastAdmin) {
-            throw new LastAdminException("A minimum of one Admin is needed");
+        if ("ADMIN".equals(userToDelete.getRole())) {
+            long adminCount = userRepository.countByRole("ADMIN");
+
+            if (adminCount == 1) {
+                throw new LastAdminException("A minimum of one Admin is needed");
+            }
         }
 
         userRepository.deleteById(id);

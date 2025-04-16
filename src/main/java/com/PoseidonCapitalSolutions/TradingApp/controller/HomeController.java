@@ -1,5 +1,6 @@
 package com.PoseidonCapitalSolutions.TradingApp.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController
 {
 	@RequestMapping("/")
-	public String home(Model model)
+	public String home(Authentication authentication)
 	{
+		if (authentication != null && authentication.isAuthenticated()) {
+			return "redirect:/bidList/list";
+		}
+
 		return "home";
 	}
 
