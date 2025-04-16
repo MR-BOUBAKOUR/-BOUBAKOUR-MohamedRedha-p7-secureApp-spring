@@ -2,6 +2,7 @@ package com.PoseidonCapitalSolutions.TradingApp.service;
 
 import com.PoseidonCapitalSolutions.TradingApp.domain.User;
 import com.PoseidonCapitalSolutions.TradingApp.dto.UserDTO;
+import com.PoseidonCapitalSolutions.TradingApp.exception.LastAdminException;
 import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
 import com.PoseidonCapitalSolutions.TradingApp.mapper.UserMapper;
 import com.PoseidonCapitalSolutions.TradingApp.repositorie.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @Service
@@ -21,7 +23,6 @@ public class UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public List<UserDTO> findAll() {
         return userRepository.findAll().stream()
                 .map(userMapper::toUserDTO)
@@ -59,6 +60,15 @@ public class UserService {
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     public void delete(Integer id) {
+
+        boolean isLastAdmin = userRepository.findAll().stream()
+                .filter(u -> "ADMIN".equals(u.getRole()))
+                .count() == 1;
+
+        if (isLastAdmin) {
+            throw new LastAdminException("A minimum of one Admin is needed");
+        }
+
         userRepository.deleteById(id);
     }
 }

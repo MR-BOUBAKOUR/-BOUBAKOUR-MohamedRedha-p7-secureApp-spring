@@ -27,6 +27,18 @@ public class GlobalExceptionHandler {
         return "error";
     }
 
+    @ExceptionHandler(LastAdminException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleLastAdminException(LastAdminException ex, Model model) {
+        logger.error("Tentative de suppression du dernier admin : {}", ex.getMessage());
+
+        model.addAttribute("errorStatus", HttpStatus.BAD_REQUEST.toString());
+        model.addAttribute("errorMessage", ex.getMessage());
+        model.addAttribute("errorTimestamp", Instant.now());
+
+        return "error";
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleGenericException(Exception ex, Model model) {
