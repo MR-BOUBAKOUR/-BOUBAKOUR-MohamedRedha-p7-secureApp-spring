@@ -12,8 +12,11 @@ public class AuditAwareImpl implements AuditorAware<String> {
 
     @Override
     public Optional<String> getCurrentAuditor() {
-        // Récupération du nom d'utilisateur authentifié
-        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return Optional.of(principal.getUsername());
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        CustomUserDetails customUserDetails = (CustomUserDetails) principal;
+
+        return Optional.of(customUserDetails.getUsername());
     }
 }
