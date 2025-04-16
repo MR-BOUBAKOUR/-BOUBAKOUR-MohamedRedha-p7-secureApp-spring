@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(LastAdminException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleLastAdminException(LastAdminException ex, Model model) {
-        logger.error("Tentative de suppression du dernier admin : {}", ex.getMessage());
+        logger.error(ex.getMessage());
 
         model.addAttribute("errorStatus", HttpStatus.BAD_REQUEST.toString());
         model.addAttribute("errorMessage", ex.getMessage());
@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleGenericException(Exception ex, Model model) {
-        logger.error("Erreur non gérée: ", ex);
+        logger.error(ex.getMessage());
 
         model.addAttribute("errorStatus", HttpStatus.INTERNAL_SERVER_ERROR.toString());
         model.addAttribute("errorMessage", ex.getMessage());
