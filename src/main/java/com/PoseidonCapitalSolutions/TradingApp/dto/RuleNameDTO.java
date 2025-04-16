@@ -10,6 +10,7 @@ public class RuleNameDTO {
 
     private Integer id;
 
+    @NotBlank(message = "name is mandatory")
     @Size(max = 125, message = "Name must not exceed 125 characters")
     private String name;
 
