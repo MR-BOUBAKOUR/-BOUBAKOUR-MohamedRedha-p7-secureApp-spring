@@ -21,7 +21,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        # For now -DskipTests
+        # For now
         run: mvn -B package --file pom.xml -DskipTests
 
       - name: Run Unit Tests
