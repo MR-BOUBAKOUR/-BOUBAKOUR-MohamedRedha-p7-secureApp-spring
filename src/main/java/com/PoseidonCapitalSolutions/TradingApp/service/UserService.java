@@ -1,5 +1,6 @@
 package com.PoseidonCapitalSolutions.TradingApp.service;
 
+import com.PoseidonCapitalSolutions.TradingApp.config.CustomUserDetails;
 import com.PoseidonCapitalSolutions.TradingApp.domain.User;
 import com.PoseidonCapitalSolutions.TradingApp.dto.UserCreateDTO;
 import com.PoseidonCapitalSolutions.TradingApp.dto.UserResponseDTO;
@@ -8,9 +9,13 @@ import com.PoseidonCapitalSolutions.TradingApp.exception.LastAdminException;
 import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
 import com.PoseidonCapitalSolutions.TradingApp.mapper.UserMapper;
 import com.PoseidonCapitalSolutions.TradingApp.repositorie.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,7 +67,7 @@ public class UserService {
 
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
-    public void delete(Integer id) {
+    public void delete(Integer id, HttpServletRequest request, HttpServletResponse response) {
 
         User userToDelete = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid user id: " + id));
@@ -75,6 +80,13 @@ public class UserService {
             }
         }
 
+        if (userToDelete.getId().equals(
+                ((CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId())) {
+            SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+            logoutHandler.logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+        }
+
         userRepository.deleteById(id);
+
     }
 }

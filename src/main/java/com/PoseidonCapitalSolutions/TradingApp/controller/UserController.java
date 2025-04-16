@@ -4,6 +4,8 @@ import com.PoseidonCapitalSolutions.TradingApp.dto.UserCreateDTO;
 import com.PoseidonCapitalSolutions.TradingApp.dto.UserResponseDTO;
 import com.PoseidonCapitalSolutions.TradingApp.dto.UserUpdateDTO;
 import com.PoseidonCapitalSolutions.TradingApp.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -69,8 +71,10 @@ public class UserController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Integer id) {
-        userService.delete(id);
+    public String deleteUser(@PathVariable("id") Integer id,
+                             HttpServletRequest request,
+                             HttpServletResponse response) {
+        userService.delete(id, request, response);
         return "redirect:/user/list";
     }
 }
