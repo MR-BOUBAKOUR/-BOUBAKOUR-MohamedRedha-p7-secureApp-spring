@@ -1,17 +1,14 @@
 package com.PoseidonCapitalSolutions.TradingApp.mapper;
 
 import com.PoseidonCapitalSolutions.TradingApp.domain.User;
-import com.PoseidonCapitalSolutions.TradingApp.dto.UserDTO;
+import com.PoseidonCapitalSolutions.TradingApp.dto.UserCreateDTO;
+import com.PoseidonCapitalSolutions.TradingApp.dto.UserResponseDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserDTO toUserDTO(User user);
-    User toUser(UserDTO userDTO);
+    UserResponseDTO toUserResponseDTO(User user);
+    User toUser(UserCreateDTO userCreateDTO);
 
-    @Mapping(target = "id", ignore = true)
-    void updateUserFromDto(UserDTO dto, @MappingTarget User entity);
 }

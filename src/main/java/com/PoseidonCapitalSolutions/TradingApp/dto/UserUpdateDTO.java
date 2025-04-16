@@ -1,12 +1,15 @@
 package com.PoseidonCapitalSolutions.TradingApp.dto;
 
-import lombok.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
+public class UserUpdateDTO {
 
     private Integer id;
 
@@ -14,7 +17,6 @@ public class UserDTO {
     @Size(max = 125, message = "Username must not exceed 125 characters")
     private String username;
 
-    @NotBlank(message = "Password is mandatory")
     @Size(max = 125, message = "Password must not exceed 125 characters")
     private String password;
 
