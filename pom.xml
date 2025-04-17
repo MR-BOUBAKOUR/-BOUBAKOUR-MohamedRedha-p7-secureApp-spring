@@ -119,17 +119,17 @@
 			<artifactId>commons-compress</artifactId>
 			<version>1.26.0</version>
 		</dependency>
-
 	</dependencies>
-
 
 	<build>
 		<plugins>
-			<!-- Compiler -->
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>
@@ -144,7 +144,6 @@
 				</configuration>
 			</plugin>
 
-			<!-- Spring Boot Plugin -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -158,21 +157,51 @@
 				</configuration>
 			</plugin>
 
-			<!-- Unit Tests -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<configuration>
+					<excludes>
+						<exclude>**/model/*</exclude>
+						<exclude>**/config/*</exclude>
+						<exclude>**/dto/**/*</exclude>
+						<exclude>**/exception/*</exclude>
+						<exclude>**/mapper/*</exclude>
+						<exclude>**/aspect/*</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.5.0</version>
-				<configuration>
-					<argLine>-javaagent:${settings.localRepository}/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar</argLine>
-				</configuration>
+				<version>3.5.2</version>
 			</plugin>
 
-			<!-- Integration Tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.5.2</version>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>3.5.0</version>
+				<version>3.5.2</version>
+				<configuration>
+					<includes>
+						<include>**/*IT.java</include>
+					</includes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -182,27 +211,16 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<!-- Code Coverage -->
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.10</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.5.2</version>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>

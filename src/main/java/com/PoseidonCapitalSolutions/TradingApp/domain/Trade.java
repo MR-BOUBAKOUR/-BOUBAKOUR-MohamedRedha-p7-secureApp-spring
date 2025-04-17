@@ -2,17 +2,15 @@ package com.PoseidonCapitalSolutions.TradingApp.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
-@EqualsAndHashCode(callSuper = true)
-@EntityListeners(AuditingEntityListener.class)
 @Data
 @Entity
 @Table(name = "trade")
-public class Trade extends Auditable {
+public class Trade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,5 +64,17 @@ public class Trade extends Auditable {
 
     @Column(name = "side", length = 125)
     private String side;
+
+    @Column(name = "creation_name")
+    protected String creationName;
+
+    @Column(name = "creation_date", updatable = false)
+    protected LocalDateTime creationDate;
+
+    @Column(name = "revision_name")
+    protected String revisionName;
+
+    @Column(name = "revision_date")
+    protected LocalDateTime revisionDate;
 
 }

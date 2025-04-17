@@ -58,6 +58,7 @@ public class BidListController {
                             BindingResult result,
                             Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("bidList", bidListDTO);
             return "bidList/update";
         }
         bidListService.update(id, bidListDTO);

@@ -22,7 +22,7 @@
 		</div>
 		<div class="col-6 text-right">
 			<div sec:authorize="isAuthenticated()">
-				Logged user: <span sec:authentication="name"></span>&nbsp;|&nbsp;
+				Logged user: <span sec:authentication="principal.username"></span>&nbsp;|&nbsp;
 				Role: <span sec:authentication="principal.authorities"></span>
 				<form th:action="@{/app-logout}" method="POST">
 					<input type="submit" value="Logout"/>

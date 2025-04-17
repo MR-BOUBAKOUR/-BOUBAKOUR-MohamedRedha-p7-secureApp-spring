@@ -60,13 +60,17 @@ public class UserController {
 
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable("id") Integer id,
-                             @Valid @ModelAttribute("user") UserUpdateDTO userDTO,
-                             BindingResult result) {
+                             HttpServletRequest request,
+                             HttpServletResponse response,
+                             @Valid @ModelAttribute("user") UserUpdateDTO userUpdateDTO,
+                             BindingResult result,
+                             Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("user", userUpdateDTO);
             return "user/update";
         }
 
-        userService.update(id, userDTO);
+        userService.update(id, userUpdateDTO, request, response);
         return "redirect:/user/list";
     }
 

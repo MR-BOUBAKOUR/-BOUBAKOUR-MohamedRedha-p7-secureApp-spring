@@ -21,19 +21,7 @@ public class LoginController {
         if (authentication != null && authentication.isAuthenticated()) {
             return "redirect:/bidList/list";
         }
-
         return "login";
     }
 
-    @GetMapping("/secure/article-details")
-    public String getAllUserArticles(Model model) {
-        model.addAttribute("users", userRepository.findAll());
-        return "user/list";
-    }
-
-    @GetMapping("/error")
-    public String error403(Model model) {
-        model.addAttribute("errorMsg", "You are not authorized for the requested data.");
-        return "error";
-    }
 }
