@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TradeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TradingApp</a> &gt; <a href="index.source.html" class="el_package">com.PoseidonCapitalSolutions.TradingApp.controller</a> &gt; <span class="el_source">TradeController.java</span></div><h1>TradeController.java</h1><pre class="source lang-java linenums">package com.PoseidonCapitalSolutions.TradingApp.controller;
+
+import com.PoseidonCapitalSolutions.TradingApp.dto.TradeDTO;
+import com.PoseidonCapitalSolutions.TradingApp.service.TradeService;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+@AllArgsConstructor
+@Controller
+@RequestMapping(&quot;/trade&quot;)
+public class TradeController {
+
+    private final TradeService tradeService;
+
+    @RequestMapping(&quot;/list&quot;)
+    public String home(Model model) {
+<span class="fc" id="L21">        model.addAttribute(&quot;trades&quot;, tradeService.findAll());</span>
+<span class="fc" id="L22">        return &quot;trade/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/add&quot;)
+    public String addTradeForm(Model model) {
+<span class="fc" id="L27">        model.addAttribute(&quot;trade&quot;, new TradeDTO());</span>
+<span class="fc" id="L28">        return &quot;trade/add&quot;;</span>
+    }
+
+    @PostMapping(&quot;/validate&quot;)
+    public String validate(@Valid @ModelAttribute(&quot;trade&quot;) TradeDTO tradeDTO,
+                           BindingResult result,
+                           Model model) {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L36">            return &quot;trade/add&quot;;</span>
+        }
+
+<span class="fc" id="L39">        tradeService.create(tradeDTO);</span>
+<span class="fc" id="L40">        model.addAttribute(&quot;trades&quot;, tradeService.findAll());</span>
+<span class="fc" id="L41">        return &quot;redirect:/trade/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/update/{id}&quot;)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id,
+                                 Model model) {
+<span class="fc" id="L47">        TradeDTO tradeDTO = tradeService.findById(id);</span>
+<span class="fc" id="L48">        model.addAttribute(&quot;trade&quot;, tradeDTO);</span>
+<span class="fc" id="L49">        return &quot;trade/update&quot;;</span>
+    }
+
+    @PostMapping(&quot;/update/{id}&quot;)
+    public String updateTrade(@PathVariable(&quot;id&quot;) Integer id,
+                              @Valid @ModelAttribute(&quot;trade&quot;) TradeDTO tradeDTO,
+                              BindingResult result,
+                              Model model) {
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L58">            return &quot;trade/update&quot;;</span>
+        }
+
+<span class="fc" id="L61">        tradeService.update(id, tradeDTO);</span>
+<span class="fc" id="L62">        return &quot;redirect:/trade/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/delete/{id}&quot;)
+    public String deleteTrade(@PathVariable(&quot;id&quot;) Integer id,
+                              Model model) {
+<span class="fc" id="L68">        tradeService.delete(id);</span>
+<span class="fc" id="L69">        return &quot;redirect:/trade/list&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

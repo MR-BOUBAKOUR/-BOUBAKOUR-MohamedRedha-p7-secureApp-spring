@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BidListService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TradingApp</a> &gt; <a href="index.source.html" class="el_package">com.PoseidonCapitalSolutions.TradingApp.service</a> &gt; <span class="el_source">BidListService.java</span></div><h1>BidListService.java</h1><pre class="source lang-java linenums">package com.PoseidonCapitalSolutions.TradingApp.service;
+
+import com.PoseidonCapitalSolutions.TradingApp.domain.BidList;
+import com.PoseidonCapitalSolutions.TradingApp.dto.BidListDTO;
+import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
+import com.PoseidonCapitalSolutions.TradingApp.mapper.BidListMapper;
+import com.PoseidonCapitalSolutions.TradingApp.repositorie.BidListRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@AllArgsConstructor
+@Service
+public class BidListService {
+
+    private final BidListRepository bidListRepository;
+    private final BidListMapper bidListMapper;
+
+    public BidListDTO findById(Integer id) {
+<span class="fc" id="L23">        return bidListRepository.findById(id)</span>
+<span class="fc" id="L24">                .map(bidListMapper::toBidListDTO)</span>
+<span class="fc" id="L25">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid bid list id: &quot; + id));</span>
+    }
+
+    public List&lt;BidListDTO&gt; findAll() {
+<span class="fc" id="L29">        return bidListRepository.findAll().stream()</span>
+<span class="fc" id="L30">                .map(bidListMapper::toBidListDTO)</span>
+<span class="fc" id="L31">                .toList();</span>
+    }
+
+    @Transactional
+    public void create(BidListDTO bidListDTO) {
+<span class="fc" id="L36">        bidListRepository.save(bidListMapper.toBidList(bidListDTO));</span>
+<span class="fc" id="L37">    }</span>
+
+    @Transactional
+    public void update(Integer id, BidListDTO updatedBidListDTO) {
+<span class="fc" id="L41">        BidList existingBidList =  bidListRepository.findById(id)</span>
+<span class="fc" id="L42">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid bid list id: &quot; + id));</span>
+
+<span class="fc" id="L44">        bidListMapper.updateBidListFromDto(updatedBidListDTO, existingBidList);</span>
+<span class="fc" id="L45">        bidListRepository.save(existingBidList);</span>
+<span class="fc" id="L46">    }</span>
+
+    @Transactional
+    @PreAuthorize(&quot;hasAuthority('ADMIN')&quot;)
+    public void delete(Integer id) {
+<span class="fc" id="L51">        bidListRepository.deleteById(id);</span>
+<span class="fc" id="L52">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
