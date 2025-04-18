@@ -6,8 +6,8 @@ TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,BidListController,
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,RatingController,0,66,0,4,0,18,0,8,0,6
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,UserController,0,88,0,4,0,23,0,8,0,6
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,LoginController,9,0,4,0,3,0,3,0,1,0
+TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,CurvePointController,0,66,0,4,0,18,0,8,0,6
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,HomeController,14,0,4,0,5,0,5,0,3,0
-TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,CurveController,0,66,0,4,0,18,0,8,0,6
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.service,BidListService,0,75,0,0,0,15,0,7,0,7
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.service,TradeService,0,75,0,0,0,15,0,7,0,7
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.service,RuleNameService,0,75,0,0,0,15,0,7,0,7
