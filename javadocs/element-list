@@ -1,0 +1,9 @@
+com.PoseidonCapitalSolutions.TradingApp
+com.PoseidonCapitalSolutions.TradingApp.config
+com.PoseidonCapitalSolutions.TradingApp.controller
+com.PoseidonCapitalSolutions.TradingApp.domain
+com.PoseidonCapitalSolutions.TradingApp.dto
+com.PoseidonCapitalSolutions.TradingApp.exception
+com.PoseidonCapitalSolutions.TradingApp.mapper
+com.PoseidonCapitalSolutions.TradingApp.repository
+com.PoseidonCapitalSolutions.TradingApp.service
