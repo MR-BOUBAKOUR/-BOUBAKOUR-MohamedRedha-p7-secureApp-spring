@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @Controller
 @RequestMapping("/curvePoint")
-public class CurveController {
+public class CurvePointController {
 
     private final CurvePointService curvePointService;
 

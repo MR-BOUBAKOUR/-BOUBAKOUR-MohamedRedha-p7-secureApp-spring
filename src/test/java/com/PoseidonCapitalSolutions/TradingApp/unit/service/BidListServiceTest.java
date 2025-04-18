@@ -30,7 +30,6 @@ class BidListServiceTest {
     @InjectMocks
     private BidListService bidListService;
 
-
     private AutoCloseable closeable;
     private Integer id;
 

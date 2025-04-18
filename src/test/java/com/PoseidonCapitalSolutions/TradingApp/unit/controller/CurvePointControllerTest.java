@@ -1,6 +1,6 @@
 package com.PoseidonCapitalSolutions.TradingApp.unit.controller;
 
-import com.PoseidonCapitalSolutions.TradingApp.controller.CurveController;
+import com.PoseidonCapitalSolutions.TradingApp.controller.CurvePointController;
 import com.PoseidonCapitalSolutions.TradingApp.dto.CurvePointDTO;
 import com.PoseidonCapitalSolutions.TradingApp.service.CurvePointService;
 import org.junit.jupiter.api.Test;
@@ -20,9 +20,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(controllers = CurveController.class)
+@WebMvcTest(controllers = CurvePointController.class)
 @WithMockUser
-class CurveControllerTest {
+class CurvePointControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
