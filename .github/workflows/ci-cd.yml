@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,12 +20,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
-
+      - name: Build with Maven and Run Unit Tests
         run: mvn -B package --file pom.xml
-
-      - name: Run Unit Tests
-        run: mvn test
 
       - name: Run Integration Tests
         run: mvn failsafe:integration-test
@@ -48,8 +44,14 @@ jobs:
           name: javadocs
           path: target/reports/apidocs/
 
-      - name: Deploying reports to GitHub Pages
+      - name: Prepare GitHub Pages content
+        run: |
+          mkdir -p gh-pages-build
+          cp -r target/site/jacoco  gh-pages-build/jacoco
+          cp -r target/reports/apidocs gh-pages-build/javadocs
+
+      - name: Deploy JavaDocs and JaCoCo to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: target/site
+          publish_dir: gh-pages-build
