@@ -4,7 +4,7 @@ import com.PoseidonCapitalSolutions.TradingApp.domain.CurvePoint;
 import com.PoseidonCapitalSolutions.TradingApp.dto.CurvePointDTO;
 import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
 import com.PoseidonCapitalSolutions.TradingApp.mapper.CurvePointMapper;
-import com.PoseidonCapitalSolutions.TradingApp.repositorie.CurvePointRepository;
+import com.PoseidonCapitalSolutions.TradingApp.repository.CurvePointRepository;
 import com.PoseidonCapitalSolutions.TradingApp.service.CurvePointService;
 import org.junit.jupiter.api.*;
 import org.mockito.*;

@@ -1,4 +1,4 @@
-package com.PoseidonCapitalSolutions.TradingApp.repositorie;
+package com.PoseidonCapitalSolutions.TradingApp.repository;
 
 import com.PoseidonCapitalSolutions.TradingApp.domain.CurvePoint;
 import org.springframework.data.jpa.repository.JpaRepository;

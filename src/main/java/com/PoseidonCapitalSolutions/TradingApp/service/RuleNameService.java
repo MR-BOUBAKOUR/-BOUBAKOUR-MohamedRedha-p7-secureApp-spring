@@ -4,7 +4,7 @@ import com.PoseidonCapitalSolutions.TradingApp.domain.RuleName;
 import com.PoseidonCapitalSolutions.TradingApp.dto.RuleNameDTO;
 import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
 import com.PoseidonCapitalSolutions.TradingApp.mapper.RuleNameMapper;
-import com.PoseidonCapitalSolutions.TradingApp.repositorie.RuleNameRepository;
+import com.PoseidonCapitalSolutions.TradingApp.repository.RuleNameRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;

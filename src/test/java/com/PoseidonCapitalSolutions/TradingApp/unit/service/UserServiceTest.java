@@ -8,7 +8,7 @@ import com.PoseidonCapitalSolutions.TradingApp.dto.UserUpdateDTO;
 import com.PoseidonCapitalSolutions.TradingApp.exception.LastAdminException;
 import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
 import com.PoseidonCapitalSolutions.TradingApp.mapper.UserMapper;
-import com.PoseidonCapitalSolutions.TradingApp.repositorie.UserRepository;
+import com.PoseidonCapitalSolutions.TradingApp.repository.UserRepository;
 import com.PoseidonCapitalSolutions.TradingApp.service.UserService;
 import org.junit.jupiter.api.*;
 import org.mockito.*;

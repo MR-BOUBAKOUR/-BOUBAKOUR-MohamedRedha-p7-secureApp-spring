@@ -4,7 +4,7 @@ import com.PoseidonCapitalSolutions.TradingApp.domain.BidList;
 import com.PoseidonCapitalSolutions.TradingApp.dto.BidListDTO;
 import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
 import com.PoseidonCapitalSolutions.TradingApp.mapper.BidListMapper;
-import com.PoseidonCapitalSolutions.TradingApp.repositorie.BidListRepository;
+import com.PoseidonCapitalSolutions.TradingApp.repository.BidListRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;

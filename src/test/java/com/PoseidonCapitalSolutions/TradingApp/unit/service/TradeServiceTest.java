@@ -4,7 +4,7 @@ import com.PoseidonCapitalSolutions.TradingApp.domain.Trade;
 import com.PoseidonCapitalSolutions.TradingApp.dto.TradeDTO;
 import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
 import com.PoseidonCapitalSolutions.TradingApp.mapper.TradeMapper;
-import com.PoseidonCapitalSolutions.TradingApp.repositorie.TradeRepository;
+import com.PoseidonCapitalSolutions.TradingApp.repository.TradeRepository;
 import com.PoseidonCapitalSolutions.TradingApp.service.TradeService;
 import org.junit.jupiter.api.*;
 import org.mockito.*;

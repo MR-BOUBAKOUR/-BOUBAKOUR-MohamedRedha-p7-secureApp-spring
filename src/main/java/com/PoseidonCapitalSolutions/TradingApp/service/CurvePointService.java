@@ -4,7 +4,7 @@ import com.PoseidonCapitalSolutions.TradingApp.domain.CurvePoint;
 import com.PoseidonCapitalSolutions.TradingApp.dto.CurvePointDTO;
 import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
 import com.PoseidonCapitalSolutions.TradingApp.mapper.CurvePointMapper;
-import com.PoseidonCapitalSolutions.TradingApp.repositorie.CurvePointRepository;
+import com.PoseidonCapitalSolutions.TradingApp.repository.CurvePointRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;

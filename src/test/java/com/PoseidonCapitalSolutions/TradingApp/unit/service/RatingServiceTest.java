@@ -4,7 +4,7 @@ import com.PoseidonCapitalSolutions.TradingApp.domain.Rating;
 import com.PoseidonCapitalSolutions.TradingApp.dto.RatingDTO;
 import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
 import com.PoseidonCapitalSolutions.TradingApp.mapper.RatingMapper;
-import com.PoseidonCapitalSolutions.TradingApp.repositorie.RatingRepository;
+import com.PoseidonCapitalSolutions.TradingApp.repository.RatingRepository;
 import com.PoseidonCapitalSolutions.TradingApp.service.RatingService;
 import org.junit.jupiter.api.*;
 import org.mockito.*;
