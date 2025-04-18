@@ -8,7 +8,7 @@ import com.PoseidonCapitalSolutions.TradingApp.dto.UserUpdateDTO;
 import com.PoseidonCapitalSolutions.TradingApp.exception.LastAdminException;
 import com.PoseidonCapitalSolutions.TradingApp.exception.ResourceNotFoundException;
 import com.PoseidonCapitalSolutions.TradingApp.mapper.UserMapper;
-import com.PoseidonCapitalSolutions.TradingApp.repositorie.UserRepository;
+import com.PoseidonCapitalSolutions.TradingApp.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
