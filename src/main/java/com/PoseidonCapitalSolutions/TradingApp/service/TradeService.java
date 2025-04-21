@@ -48,6 +48,9 @@ public class TradeService {
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(Integer id) {
-        tradeRepository.deleteById(id);
+        Trade tradeToDelete = tradeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid trade id: " + id));
+
+        tradeRepository.delete(tradeToDelete);
     }
 }

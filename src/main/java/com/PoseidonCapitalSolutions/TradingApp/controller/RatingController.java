@@ -4,6 +4,7 @@ import com.PoseidonCapitalSolutions.TradingApp.dto.RatingDTO;
 import com.PoseidonCapitalSolutions.TradingApp.service.RatingService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ public class RatingController {
         return "rating/list";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/add")
     public String addRatingForm(Model model) {
         model.addAttribute("rating", new RatingDTO());
@@ -41,6 +43,7 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id,
                                  Model model) {

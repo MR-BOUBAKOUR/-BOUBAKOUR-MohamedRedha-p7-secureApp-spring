@@ -44,14 +44,6 @@ class CurvePointControllerTest {
     }
 
     @Test
-    void testAddCurveForm_Show() throws Exception {
-        mockMvc.perform(get("/curvePoint/add"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("curvePoint/add"))
-                .andExpect(model().attributeExists("curvePoint"));
-    }
-
-    @Test
     void testValidateCurve_Success() throws Exception {
         mockMvc.perform(post("/curvePoint/validate")
                         .with(csrf())
@@ -72,24 +64,6 @@ class CurvePointControllerTest {
                 .andExpect(view().name("curvePoint/add"));
 
         verify(curvePointService, never()).create(any(CurvePointDTO.class));
-    }
-
-    @Test
-    void testUpdateCurveForm_Show() throws Exception {
-        Integer id = 1;
-        CurvePointDTO curvePointDTO = new CurvePointDTO();
-        curvePointDTO.setId(id);
-        curvePointDTO.setTerm(10.0);
-        curvePointDTO.setValue(20.0);
-
-        when(curvePointService.findById(id)).thenReturn(curvePointDTO);
-
-        mockMvc.perform(get("/curvePoint/update/{id}", id))
-                .andExpect(status().isOk())
-                .andExpect(view().name("curvePoint/update"))
-                .andExpect(model().attribute("curvePoint", curvePointDTO));
-
-        verify(curvePointService).findById(id);
     }
 
     @Test

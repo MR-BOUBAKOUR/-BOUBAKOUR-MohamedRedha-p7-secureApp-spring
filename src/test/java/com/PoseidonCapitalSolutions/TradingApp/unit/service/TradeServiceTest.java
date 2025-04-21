@@ -115,8 +115,22 @@ class TradeServiceTest {
 
     @Test
     void delete_success() {
+        Trade tradeToDelete = new Trade();
+
+        when(tradeRepository.findById(id)).thenReturn(Optional.of(tradeToDelete));
+
         tradeService.delete(id);
 
-        verify(tradeRepository).deleteById(id);
+        verify(tradeRepository).delete(tradeToDelete);
     }
+
+    @Test
+    void delete_exception() {
+        when(tradeRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> tradeService.delete(id));
+
+        verify(tradeRepository, never()).delete(any());
+    }
+
 }

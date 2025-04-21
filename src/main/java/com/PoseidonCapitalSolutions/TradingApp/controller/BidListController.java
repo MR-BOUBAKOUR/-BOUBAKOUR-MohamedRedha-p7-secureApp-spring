@@ -4,6 +4,7 @@ import com.PoseidonCapitalSolutions.TradingApp.domain.BidList;
 import com.PoseidonCapitalSolutions.TradingApp.dto.BidListDTO;
 import com.PoseidonCapitalSolutions.TradingApp.service.BidListService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ public class BidListController {
         return "bidList/list";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/add")
     public String addBidForm(Model model) {
         model.addAttribute("bidList", new BidListDTO());
@@ -44,6 +46,7 @@ public class BidListController {
         return "redirect:/bidList/list";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id,
                                  Model model) {

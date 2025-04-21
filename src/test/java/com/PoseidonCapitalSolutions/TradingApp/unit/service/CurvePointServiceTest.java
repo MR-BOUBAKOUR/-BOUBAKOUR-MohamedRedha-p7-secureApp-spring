@@ -115,8 +115,21 @@ class CurvePointServiceTest {
 
     @Test
     void delete_success() {
+        CurvePoint curvePointToDelete = new CurvePoint();
+
+        when(curvePointRepository.findById(id)).thenReturn(Optional.of(curvePointToDelete));
+
         curvePointService.delete(id);
 
-        verify(curvePointRepository).deleteById(id);
+        verify(curvePointRepository).delete(curvePointToDelete);
+    }
+
+    @Test
+    void delete_exception() {
+        when(curvePointRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> curvePointService.delete(id));
+
+        verify(curvePointRepository, never()).delete(any());
     }
 }

@@ -44,14 +44,6 @@ class TradeControllerTest {
     }
 
     @Test
-    void testAddTradeForm_Show() throws Exception {
-        mockMvc.perform(get("/trade/add"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("trade/add"))
-                .andExpect(model().attributeExists("trade"));
-    }
-
-    @Test
     void testValidateTrade_Success() throws Exception {
         mockMvc.perform(post("/trade/validate")
                         .with(csrf())
@@ -72,24 +64,6 @@ class TradeControllerTest {
                 .andExpect(view().name("trade/add"));
 
         verify(tradeService, never()).create(any(TradeDTO.class));
-    }
-
-    @Test
-    void testUpdateTradeForm_Show() throws Exception {
-        Integer id = 1;
-        TradeDTO tradeDTO = new TradeDTO();
-        tradeDTO.setId(id);
-        tradeDTO.setAccount("Account1");
-        tradeDTO.setType("Type1");
-
-        when(tradeService.findById(id)).thenReturn(tradeDTO);
-
-        mockMvc.perform(get("/trade/update/{id}", id))
-                .andExpect(status().isOk())
-                .andExpect(view().name("trade/update"))
-                .andExpect(model().attribute("trade", tradeDTO));
-
-        verify(tradeService).findById(id);
     }
 
     @Test

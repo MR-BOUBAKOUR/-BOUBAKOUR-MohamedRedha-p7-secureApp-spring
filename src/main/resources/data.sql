@@ -96,21 +96,3 @@ CREATE TABLE users (
 
    PRIMARY KEY (id)
 );
-
-INSERT INTO users(fullname, username, password, role)
-VALUES
-    (
-        'Administrator',
-        'admin',
-        '$2a$12$2udLm4vduzO.1FSnYEiGlO3s.LcfVqcNlE1BFaWK.0iQUKYUWwDw2',
-        'ADMIN'
-    );
-
-INSERT INTO users(fullname, username, password, role)
-VALUES
-    (
-        'User',
-        'user',
-        '$2a$12$2udLm4vduzO.1FSnYEiGlO3s.LcfVqcNlE1BFaWK.0iQUKYUWwDw2',
-        'USER'
-    );

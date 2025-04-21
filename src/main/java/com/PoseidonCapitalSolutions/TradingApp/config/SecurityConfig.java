@@ -44,8 +44,7 @@ public class SecurityConfig {
                         .logoutUrl("/app-logout")
                         .logoutSuccessUrl("/?logout=true")
                         .permitAll()
-                )
-                .userDetailsService(userDetailsService);
+                );
 
         return http.build();
     }

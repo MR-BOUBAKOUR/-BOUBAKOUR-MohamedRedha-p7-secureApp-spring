@@ -3,6 +3,7 @@ package com.PoseidonCapitalSolutions.TradingApp.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,6 +35,18 @@ public class GlobalExceptionHandler {
 
         model.addAttribute("errorStatus", HttpStatus.BAD_REQUEST.toString());
         model.addAttribute("errorMessage", ex.getMessage());
+        model.addAttribute("errorTimestamp", Instant.now());
+
+        return "error";
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String handleAccessDeniedException(AccessDeniedException ex, Model model) {
+        logger.error(ex.getMessage());
+
+        model.addAttribute("errorStatus", HttpStatus.FORBIDDEN.toString());
+        model.addAttribute("errorMessage", "Access Denied");
         model.addAttribute("errorTimestamp", Instant.now());
 
         return "error";

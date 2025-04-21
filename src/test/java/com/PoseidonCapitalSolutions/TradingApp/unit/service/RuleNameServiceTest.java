@@ -115,8 +115,22 @@ class RuleNameServiceTest {
 
     @Test
     void delete_success() {
+        RuleName ruleNameToDelete = new RuleName();
+
+        when(ruleNameRepository.findById(id)).thenReturn(Optional.of(ruleNameToDelete));
+
         ruleNameService.delete(id);
 
-        verify(ruleNameRepository).deleteById(id);
+        verify(ruleNameRepository).delete(ruleNameToDelete);
     }
+
+    @Test
+    void delete_exception() {
+        when(ruleNameRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> ruleNameService.delete(id));
+
+        verify(ruleNameRepository, never()).delete(any());
+    }
+
 }

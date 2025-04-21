@@ -48,7 +48,10 @@ public class BidListService {
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(Integer id) {
-        bidListRepository.deleteById(id);
+        BidList bidListToDelete = bidListRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid bid list id: " + id));
+
+        bidListRepository.delete(bidListToDelete);
     }
 
 }

@@ -48,6 +48,9 @@ public class CurvePointService {
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(Integer id) {
-        curvePointRepository.deleteById(id);
+        CurvePoint curvePointToDelete = curvePointRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid curve point id: " + id));
+
+        curvePointRepository.delete(curvePointToDelete);
     }
 }
