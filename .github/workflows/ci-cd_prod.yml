@@ -1,8 +1,6 @@
-name: TradingApp CI/CD
+name: TradingApp CI/CD - PR to main (heavy)
 
 on:
-  push:
-    branches: [ dev ]
   pull_request:
     branches: [ main ]
 
