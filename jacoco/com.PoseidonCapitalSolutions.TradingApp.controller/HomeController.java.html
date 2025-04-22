@@ -5,23 +5,38 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * The type Home controller.
+ */
 @Controller
-<span class="fc" id="L9">public class HomeController</span>
+<span class="fc" id="L12">public class HomeController</span>
 {
+	/**
+	 * Home string.
+	 *
+	 * @param authentication the authentication
+	 * @return the string
+	 */
 	@RequestMapping(&quot;/&quot;)
 	public String home(Authentication authentication)
 	{
-<span class="nc bnc" id="L14" title="All 4 branches missed.">		if (authentication != null &amp;&amp; authentication.isAuthenticated()) {</span>
-<span class="nc" id="L15">			return &quot;redirect:/bidList/list&quot;;</span>
+<span class="nc bnc" id="L23" title="All 4 branches missed.">		if (authentication != null &amp;&amp; authentication.isAuthenticated()) {</span>
+<span class="nc" id="L24">			return &quot;redirect:/bidList/list&quot;;</span>
 		}
 
-<span class="nc" id="L18">		return &quot;home&quot;;</span>
+<span class="nc" id="L27">		return &quot;home&quot;;</span>
 	}
 
+	/**
+	 * Admin home string.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(&quot;/admin/home&quot;)
 	public String adminHome(Model model)
 	{
-<span class="nc" id="L24">		return &quot;redirect:/bidList/list&quot;;</span>
+<span class="nc" id="L39">		return &quot;redirect:/bidList/list&quot;;</span>
 	}
 
 }

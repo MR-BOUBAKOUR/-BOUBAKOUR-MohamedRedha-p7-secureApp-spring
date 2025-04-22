@@ -5,12 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+/**
+ * The type Custom error controller.
+ */
 @Controller
-<span class="fc" id="L9">public class CustomErrorController implements ErrorController {</span>
+<span class="fc" id="L12">public class CustomErrorController implements ErrorController {</span>
 
+    /**
+     * Handle error string.
+     *
+     * @return the string
+     */
     @RequestMapping(&quot;/error&quot;)
     public String handleError() {
-<span class="nc" id="L13">        return &quot;error&quot;;</span>
+<span class="nc" id="L21">        return &quot;error&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

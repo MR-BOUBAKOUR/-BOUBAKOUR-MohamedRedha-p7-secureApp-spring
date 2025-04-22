@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The type Curve point service.
+ */
 @AllArgsConstructor
 @Service
 public class CurvePointService {
@@ -19,39 +22,66 @@ public class CurvePointService {
     private final CurvePointRepository curvePointRepository;
     private final CurvePointMapper curvePointMapper;
 
+    /**
+     * Find by id curve point dto.
+     *
+     * @param id the id
+     * @return the curve point dto
+     */
     public CurvePointDTO findById(Integer id) {
-<span class="fc" id="L23">        return curvePointRepository.findById(id)</span>
-<span class="fc" id="L24">                .map(curvePointMapper::toCurvePointDTO)</span>
-<span class="fc" id="L25">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid curve point id: &quot; + id));</span>
+<span class="fc" id="L32">        return curvePointRepository.findById(id)</span>
+<span class="fc" id="L33">                .map(curvePointMapper::toCurvePointDTO)</span>
+<span class="fc" id="L34">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid curve point id: &quot; + id));</span>
     }
 
+    /**
+     * Find all list.
+     *
+     * @return the list
+     */
     public List&lt;CurvePointDTO&gt; findAll() {
-<span class="fc" id="L29">        return curvePointRepository.findAll().stream()</span>
-<span class="fc" id="L30">                .map(curvePointMapper::toCurvePointDTO)</span>
-<span class="fc" id="L31">                .toList();</span>
+<span class="fc" id="L43">        return curvePointRepository.findAll().stream()</span>
+<span class="fc" id="L44">                .map(curvePointMapper::toCurvePointDTO)</span>
+<span class="fc" id="L45">                .toList();</span>
     }
 
+    /**
+     * Create.
+     *
+     * @param curvePointDTO the curve point dto
+     */
     @Transactional
     public void create(CurvePointDTO curvePointDTO) {
-<span class="fc" id="L36">        curvePointRepository.save(curvePointMapper.toCurvePoint(curvePointDTO));</span>
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L55">        curvePointRepository.save(curvePointMapper.toCurvePoint(curvePointDTO));</span>
+<span class="fc" id="L56">    }</span>
 
+    /**
+     * Update.
+     *
+     * @param id                   the id
+     * @param updatedCurvePointDTO the updated curve point dto
+     */
     @Transactional
     public void update(Integer id, CurvePointDTO updatedCurvePointDTO) {
-<span class="fc" id="L41">        CurvePoint existingCurvePoint = curvePointRepository.findById(id)</span>
-<span class="fc" id="L42">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid curve point id: &quot; + id));</span>
+<span class="fc" id="L66">        CurvePoint existingCurvePoint = curvePointRepository.findById(id)</span>
+<span class="fc" id="L67">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid curve point id: &quot; + id));</span>
 
-<span class="fc" id="L44">        curvePointMapper.updateCurvePointFromDto(updatedCurvePointDTO, existingCurvePoint);</span>
-<span class="fc" id="L45">        curvePointRepository.save(existingCurvePoint);</span>
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L69">        curvePointMapper.updateCurvePointFromDto(updatedCurvePointDTO, existingCurvePoint);</span>
+<span class="fc" id="L70">        curvePointRepository.save(existingCurvePoint);</span>
+<span class="fc" id="L71">    }</span>
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @Transactional
     @PreAuthorize(&quot;hasAuthority('ADMIN')&quot;)
     public void delete(Integer id) {
-<span class="fc" id="L51">        CurvePoint curvePointToDelete = curvePointRepository.findById(id)</span>
-<span class="fc" id="L52">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid curve point id: &quot; + id));</span>
+<span class="fc" id="L81">        CurvePoint curvePointToDelete = curvePointRepository.findById(id)</span>
+<span class="fc" id="L82">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid curve point id: &quot; + id));</span>
 
-<span class="fc" id="L54">        curvePointRepository.delete(curvePointToDelete);</span>
-<span class="fc" id="L55">    }</span>
+<span class="fc" id="L84">        curvePointRepository.delete(curvePointToDelete);</span>
+<span class="fc" id="L85">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

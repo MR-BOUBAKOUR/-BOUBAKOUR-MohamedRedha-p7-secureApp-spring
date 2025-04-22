@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * The type Trade controller.
+ */
 @AllArgsConstructor
 @Controller
 @RequestMapping(&quot;/trade&quot;)
@@ -17,59 +20,102 @@ public class TradeController {
 
     private final TradeService tradeService;
 
+    /**
+     * Home string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping(&quot;/list&quot;)
     public String home(Model model) {
-<span class="fc" id="L22">        model.addAttribute(&quot;trades&quot;, tradeService.findAll());</span>
-<span class="fc" id="L23">        return &quot;trade/list&quot;;</span>
+<span class="fc" id="L31">        model.addAttribute(&quot;trades&quot;, tradeService.findAll());</span>
+<span class="fc" id="L32">        return &quot;trade/list&quot;;</span>
     }
 
+    /**
+     * Add trade form string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/add&quot;)
     public String addTradeForm(Model model) {
-<span class="nc" id="L29">        model.addAttribute(&quot;trade&quot;, new TradeDTO());</span>
-<span class="nc" id="L30">        return &quot;trade/add&quot;;</span>
+<span class="nc" id="L44">        model.addAttribute(&quot;trade&quot;, new TradeDTO());</span>
+<span class="nc" id="L45">        return &quot;trade/add&quot;;</span>
     }
 
+    /**
+     * Validate string.
+     *
+     * @param tradeDTO the trade dto
+     * @param result   the result
+     * @param model    the model
+     * @return the string
+     */
     @PostMapping(&quot;/validate&quot;)
     public String validate(@Valid @ModelAttribute(&quot;trade&quot;) TradeDTO tradeDTO,
                            BindingResult result,
                            Model model) {
-<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L38">            return &quot;trade/add&quot;;</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L61">            return &quot;trade/add&quot;;</span>
         }
 
-<span class="fc" id="L41">        tradeService.create(tradeDTO);</span>
-<span class="fc" id="L42">        model.addAttribute(&quot;trades&quot;, tradeService.findAll());</span>
-<span class="fc" id="L43">        return &quot;redirect:/trade/list&quot;;</span>
+<span class="fc" id="L64">        tradeService.create(tradeDTO);</span>
+<span class="fc" id="L65">        model.addAttribute(&quot;trades&quot;, tradeService.findAll());</span>
+<span class="fc" id="L66">        return &quot;redirect:/trade/list&quot;;</span>
     }
 
+    /**
+     * Show update form string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id,
                                  Model model) {
-<span class="nc" id="L50">        TradeDTO tradeDTO = tradeService.findById(id);</span>
-<span class="nc" id="L51">        model.addAttribute(&quot;trade&quot;, tradeDTO);</span>
-<span class="nc" id="L52">        return &quot;trade/update&quot;;</span>
+<span class="nc" id="L80">        TradeDTO tradeDTO = tradeService.findById(id);</span>
+<span class="nc" id="L81">        model.addAttribute(&quot;trade&quot;, tradeDTO);</span>
+<span class="nc" id="L82">        return &quot;trade/update&quot;;</span>
     }
 
+    /**
+     * Update trade string.
+     *
+     * @param id       the id
+     * @param tradeDTO the trade dto
+     * @param result   the result
+     * @param model    the model
+     * @return the string
+     */
     @PostMapping(&quot;/update/{id}&quot;)
     public String updateTrade(@PathVariable(&quot;id&quot;) Integer id,
                               @Valid @ModelAttribute(&quot;trade&quot;) TradeDTO tradeDTO,
                               BindingResult result,
                               Model model) {
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L61">            return &quot;trade/update&quot;;</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L100">            return &quot;trade/update&quot;;</span>
         }
 
-<span class="fc" id="L64">        tradeService.update(id, tradeDTO);</span>
-<span class="fc" id="L65">        return &quot;redirect:/trade/list&quot;;</span>
+<span class="fc" id="L103">        tradeService.update(id, tradeDTO);</span>
+<span class="fc" id="L104">        return &quot;redirect:/trade/list&quot;;</span>
     }
 
+    /**
+     * Delete trade string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @GetMapping(&quot;/delete/{id}&quot;)
     public String deleteTrade(@PathVariable(&quot;id&quot;) Integer id,
                               Model model) {
-<span class="fc" id="L71">        tradeService.delete(id);</span>
-<span class="fc" id="L72">        return &quot;redirect:/trade/list&quot;;</span>
+<span class="fc" id="L117">        tradeService.delete(id);</span>
+<span class="fc" id="L118">        return &quot;redirect:/trade/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

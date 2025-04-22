@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * The type Login controller.
+ */
 @Controller
 @RequiredArgsConstructor
 @RequestMapping
@@ -14,13 +17,19 @@ public class LoginController {
 
     private final UserRepository userRepository;
 
+    /**
+     * Login page string.
+     *
+     * @param authentication the authentication
+     * @return the string
+     */
     @GetMapping(&quot;/login&quot;)
     public String loginPage(Authentication authentication) {
 
-<span class="nc bnc" id="L20" title="All 4 branches missed.">        if (authentication != null &amp;&amp; authentication.isAuthenticated()) {</span>
-<span class="nc" id="L21">            return &quot;redirect:/bidList/list&quot;;</span>
+<span class="nc bnc" id="L29" title="All 4 branches missed.">        if (authentication != null &amp;&amp; authentication.isAuthenticated()) {</span>
+<span class="nc" id="L30">            return &quot;redirect:/bidList/list&quot;;</span>
         }
-<span class="nc" id="L23">        return &quot;login&quot;;</span>
+<span class="nc" id="L32">        return &quot;login&quot;;</span>
     }
 
 }
