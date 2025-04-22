@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * The type Curve point controller.
+ */
 @AllArgsConstructor
 @Controller
 @RequestMapping("/curvePoint")
@@ -17,12 +20,24 @@ public class CurvePointController {
 
     private final CurvePointService curvePointService;
 
+    /**
+     * Home string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping("/list")
     public String home(Model model) {
         model.addAttribute("curvePoints", curvePointService.findAll());
         return "curvePoint/list";
     }
 
+    /**
+     * Add curve form string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/add")
     public String addCurveForm(Model model) {
@@ -30,6 +45,14 @@ public class CurvePointController {
         return "curvePoint/add";
     }
 
+    /**
+     * Validate string.
+     *
+     * @param curvePointDTO the curve point dto
+     * @param result        the result
+     * @param model         the model
+     * @return the string
+     */
     @PostMapping("/validate")
     public String validate(@Valid @ModelAttribute("curvePoint") CurvePointDTO curvePointDTO,
                            BindingResult result,
@@ -43,6 +66,13 @@ public class CurvePointController {
         return "redirect:/curvePoint/list";
     }
 
+    /**
+     * Show update form string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
@@ -51,6 +81,15 @@ public class CurvePointController {
         return "curvePoint/update";
     }
 
+    /**
+     * Update curve string.
+     *
+     * @param id            the id
+     * @param curvePointDTO the curve point dto
+     * @param result        the result
+     * @param model         the model
+     * @return the string
+     */
     @PostMapping("/update/{id}")
     public String updateCurve(@PathVariable("id") Integer id,
                               @Valid @ModelAttribute("curvePoint") CurvePointDTO curvePointDTO,
@@ -64,6 +103,13 @@ public class CurvePointController {
         return "redirect:/curvePoint/list";
     }
 
+    /**
+     * Delete curve string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/delete/{id}")
     public String deleteCurve(@PathVariable("id") Integer id, Model model) {
         curvePointService.delete(id);

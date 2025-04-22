@@ -19,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The type User service.
+ */
 @AllArgsConstructor
 @Service
 public class UserService {
@@ -28,12 +31,23 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final SecurityUtils securityUtils;
 
+    /**
+     * Find all list.
+     *
+     * @return the list
+     */
     public List<UserResponseDTO> findAll() {
         return userRepository.findAll().stream()
                 .map(userMapper::toUserResponseDTO)
                 .toList();
     }
 
+    /**
+     * Find by id user response dto.
+     *
+     * @param id the id
+     * @return the user response dto
+     */
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public UserResponseDTO findById(Integer id) {
         return userRepository.findById(id)
@@ -41,12 +55,25 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid user id: " + id));
     }
 
+    /**
+     * Create.
+     *
+     * @param userCreateDTO the user create dto
+     */
     @Transactional
     public void create(UserCreateDTO userCreateDTO) {
         userCreateDTO.setPassword(passwordEncoder.encode(userCreateDTO.getPassword()));
         userRepository.save(userMapper.toUser(userCreateDTO));
     }
 
+    /**
+     * Update.
+     *
+     * @param id            the id
+     * @param userUpdateDTO the user update dto
+     * @param request       the request
+     * @param response      the response
+     */
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     public void update(Integer id, UserUpdateDTO userUpdateDTO, HttpServletRequest request, HttpServletResponse response) {
@@ -68,6 +95,13 @@ public class UserService {
         }
     }
 
+    /**
+     * Delete.
+     *
+     * @param id       the id
+     * @param request  the request
+     * @param response the response
+     */
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     public void delete(Integer id, HttpServletRequest request, HttpServletResponse response) {

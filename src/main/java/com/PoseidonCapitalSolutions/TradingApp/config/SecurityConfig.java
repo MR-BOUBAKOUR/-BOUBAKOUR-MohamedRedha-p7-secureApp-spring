@@ -10,6 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * The type Security config.
+ */
 @AllArgsConstructor
 @Configuration
 @EnableWebSecurity
@@ -17,6 +20,13 @@ public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
 
+    /**
+     * Security filter chain.
+     *
+     * @param http the http
+     * @return the security filter chain
+     * @throws Exception the exception
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -49,6 +59,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Password encoder.
+     *
+     * @return the password encoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
