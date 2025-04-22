@@ -48,8 +48,11 @@ public class BidListService {
     @Transactional
     @PreAuthorize(&quot;hasAuthority('ADMIN')&quot;)
     public void delete(Integer id) {
-<span class="fc" id="L51">        bidListRepository.deleteById(id);</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L51">        BidList bidListToDelete = bidListRepository.findById(id)</span>
+<span class="fc" id="L52">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid bid list id: &quot; + id));</span>
+
+<span class="fc" id="L54">        bidListRepository.delete(bidListToDelete);</span>
+<span class="fc" id="L55">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -4,6 +4,7 @@ import com.PoseidonCapitalSolutions.TradingApp.dto.RuleNameDTO;
 import com.PoseidonCapitalSolutions.TradingApp.service.RuleNameService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,35 +19,37 @@ public class RuleNameController {
 
     @RequestMapping(&quot;/list&quot;)
     public String home(Model model) {
-<span class="fc" id="L21">        model.addAttribute(&quot;ruleNames&quot;, ruleNameService.findAll());</span>
-<span class="fc" id="L22">        return &quot;ruleName/list&quot;;</span>
+<span class="fc" id="L22">        model.addAttribute(&quot;ruleNames&quot;, ruleNameService.findAll());</span>
+<span class="fc" id="L23">        return &quot;ruleName/list&quot;;</span>
     }
 
+    @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/add&quot;)
     public String addRuleForm(Model model) {
-<span class="fc" id="L27">        model.addAttribute(&quot;ruleName&quot;, new RuleNameDTO());</span>
-<span class="fc" id="L28">        return &quot;ruleName/add&quot;;</span>
+<span class="nc" id="L29">        model.addAttribute(&quot;ruleName&quot;, new RuleNameDTO());</span>
+<span class="nc" id="L30">        return &quot;ruleName/add&quot;;</span>
     }
 
     @PostMapping(&quot;/validate&quot;)
     public String validate(@Valid @ModelAttribute(&quot;ruleName&quot;) RuleNameDTO ruleNameDTO,
                            BindingResult result,
                            Model model) {
-<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L36">            return &quot;ruleName/add&quot;;</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L38">            return &quot;ruleName/add&quot;;</span>
         }
 
-<span class="fc" id="L39">        ruleNameService.create(ruleNameDTO);</span>
-<span class="fc" id="L40">        model.addAttribute(&quot;ruleNames&quot;, ruleNameService.findAll());</span>
-<span class="fc" id="L41">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L41">        ruleNameService.create(ruleNameDTO);</span>
+<span class="fc" id="L42">        model.addAttribute(&quot;ruleNames&quot;, ruleNameService.findAll());</span>
+<span class="fc" id="L43">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 
+    @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id,
                                  Model model) {
-<span class="fc" id="L47">        RuleNameDTO ruleNameDTO = ruleNameService.findById(id);</span>
-<span class="fc" id="L48">        model.addAttribute(&quot;ruleName&quot;, ruleNameDTO);</span>
-<span class="fc" id="L49">        return &quot;ruleName/update&quot;;</span>
+<span class="nc" id="L50">        RuleNameDTO ruleNameDTO = ruleNameService.findById(id);</span>
+<span class="nc" id="L51">        model.addAttribute(&quot;ruleName&quot;, ruleNameDTO);</span>
+<span class="nc" id="L52">        return &quot;ruleName/update&quot;;</span>
     }
 
     @PostMapping(&quot;/update/{id}&quot;)
@@ -54,19 +57,19 @@ public class RuleNameController {
                                  @Valid @ModelAttribute(&quot;ruleName&quot;) RuleNameDTO ruleNameDTO,
                                  BindingResult result,
                                  Model model) {
-<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L58">            return &quot;ruleName/update&quot;;</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L61">            return &quot;ruleName/update&quot;;</span>
         }
 
-<span class="fc" id="L61">        ruleNameService.update(id, ruleNameDTO);</span>
-<span class="fc" id="L62">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L64">        ruleNameService.update(id, ruleNameDTO);</span>
+<span class="fc" id="L65">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 
     @GetMapping(&quot;/delete/{id}&quot;)
     public String deleteRuleName(@PathVariable(&quot;id&quot;) Integer id,
                                  Model model) {
-<span class="fc" id="L68">        ruleNameService.delete(id);</span>
-<span class="fc" id="L69">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L71">        ruleNameService.delete(id);</span>
+<span class="fc" id="L72">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

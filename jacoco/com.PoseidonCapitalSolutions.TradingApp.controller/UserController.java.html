@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,40 +23,41 @@ public class UserController {
 
     @GetMapping(&quot;/list&quot;)
     public String listUsers(Model model) {
-<span class="fc" id="L25">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
-<span class="fc" id="L26">        return &quot;user/list&quot;;</span>
+<span class="fc" id="L26">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="fc" id="L27">        return &quot;user/list&quot;;</span>
     }
 
     @GetMapping(&quot;/add&quot;)
     public String showAddForm(Model model) {
-<span class="fc" id="L31">        model.addAttribute(&quot;user&quot;, new UserCreateDTO());</span>
-<span class="fc" id="L32">        return &quot;user/add&quot;;</span>
+<span class="nc" id="L32">        model.addAttribute(&quot;user&quot;, new UserCreateDTO());</span>
+<span class="nc" id="L33">        return &quot;user/add&quot;;</span>
     }
 
     @PostMapping(&quot;/validate&quot;)
     public String validateUser(@Valid @ModelAttribute(&quot;user&quot;) UserCreateDTO userCreateDTO,
                                BindingResult result) {
-<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L39">            return &quot;user/add&quot;;</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L40">            return &quot;user/add&quot;;</span>
         }
-<span class="fc" id="L41">        userService.create(userCreateDTO);</span>
-<span class="fc" id="L42">        return &quot;redirect:/user/list&quot;;</span>
+<span class="fc" id="L42">        userService.create(userCreateDTO);</span>
+<span class="fc" id="L43">        return &quot;redirect:/user/list&quot;;</span>
     }
 
+    @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id,
                                  Model model) {
-<span class="fc" id="L48">        UserResponseDTO userResponseDTO = userService.findById(id);</span>
-<span class="fc" id="L49">        UserUpdateDTO userUpdateDTO = new UserUpdateDTO();</span>
+<span class="nc" id="L50">        UserResponseDTO userResponseDTO = userService.findById(id);</span>
+<span class="nc" id="L51">        UserUpdateDTO userUpdateDTO = new UserUpdateDTO();</span>
 
-<span class="fc" id="L51">        userUpdateDTO.setId(userResponseDTO.getId());</span>
-<span class="fc" id="L52">        userUpdateDTO.setUsername(userResponseDTO.getUsername());</span>
-<span class="fc" id="L53">        userUpdateDTO.setFullname(userResponseDTO.getFullname());</span>
-<span class="fc" id="L54">        userUpdateDTO.setRole(userResponseDTO.getRole());</span>
+<span class="nc" id="L53">        userUpdateDTO.setId(userResponseDTO.getId());</span>
+<span class="nc" id="L54">        userUpdateDTO.setUsername(userResponseDTO.getUsername());</span>
+<span class="nc" id="L55">        userUpdateDTO.setFullname(userResponseDTO.getFullname());</span>
+<span class="nc" id="L56">        userUpdateDTO.setRole(userResponseDTO.getRole());</span>
         // Leaving the password empty
 
-<span class="fc" id="L57">        model.addAttribute(&quot;user&quot;, userUpdateDTO);</span>
-<span class="fc" id="L58">        return &quot;user/update&quot;;</span>
+<span class="nc" id="L59">        model.addAttribute(&quot;user&quot;, userUpdateDTO);</span>
+<span class="nc" id="L60">        return &quot;user/update&quot;;</span>
     }
 
     @PostMapping(&quot;/update/{id}&quot;)
@@ -65,21 +67,21 @@ public class UserController {
                              @Valid @ModelAttribute(&quot;user&quot;) UserUpdateDTO userUpdateDTO,
                              BindingResult result,
                              Model model) {
-<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L69">            model.addAttribute(&quot;user&quot;, userUpdateDTO);</span>
-<span class="fc" id="L70">            return &quot;user/update&quot;;</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L71">            model.addAttribute(&quot;user&quot;, userUpdateDTO);</span>
+<span class="fc" id="L72">            return &quot;user/update&quot;;</span>
         }
 
-<span class="fc" id="L73">        userService.update(id, userUpdateDTO, request, response);</span>
-<span class="fc" id="L74">        return &quot;redirect:/user/list&quot;;</span>
+<span class="fc" id="L75">        userService.update(id, userUpdateDTO, request, response);</span>
+<span class="fc" id="L76">        return &quot;redirect:/user/list&quot;;</span>
     }
 
     @GetMapping(&quot;/delete/{id}&quot;)
     public String deleteUser(@PathVariable(&quot;id&quot;) Integer id,
                              HttpServletRequest request,
                              HttpServletResponse response) {
-<span class="fc" id="L81">        userService.delete(id, request, response);</span>
-<span class="fc" id="L82">        return &quot;redirect:/user/list&quot;;</span>
+<span class="fc" id="L83">        userService.delete(id, request, response);</span>
+<span class="fc" id="L84">        return &quot;redirect:/user/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

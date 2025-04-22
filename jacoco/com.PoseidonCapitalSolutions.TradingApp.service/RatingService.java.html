@@ -48,7 +48,10 @@ public class RatingService {
     @Transactional
     @PreAuthorize(&quot;hasAuthority('ADMIN')&quot;)
     public void delete(Integer id) {
-<span class="fc" id="L51">        ratingRepository.deleteById(id);</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L51">        Rating ratingToDelete = ratingRepository.findById(id)</span>
+<span class="fc" id="L52">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid rating id: &quot; + id));</span>
+
+<span class="fc" id="L54">        ratingRepository.delete(ratingToDelete);</span>
+<span class="fc" id="L55">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
