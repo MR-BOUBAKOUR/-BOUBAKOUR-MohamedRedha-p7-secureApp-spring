@@ -57,14 +57,14 @@ public class UserService {
 <span class="fc" id="L57">        existingUser.setFullname(userUpdateDTO.getFullname());</span>
 <span class="fc" id="L58">        existingUser.setRole(userUpdateDTO.getRole());</span>
 
-<span class="pc bpc" id="L60" title="3 of 4 branches missed.">        if (userUpdateDTO.getPassword() != null &amp;&amp; !userUpdateDTO.getPassword().isBlank()) {</span>
-<span class="nc" id="L61">            existingUser.setPassword(passwordEncoder.encode(userUpdateDTO.getPassword()));</span>
+<span class="pc bpc" id="L60" title="1 of 4 branches missed.">        if (userUpdateDTO.getPassword() != null &amp;&amp; !userUpdateDTO.getPassword().isBlank()) {</span>
+<span class="fc" id="L61">            existingUser.setPassword(passwordEncoder.encode(userUpdateDTO.getPassword()));</span>
         }
 
 <span class="fc" id="L64">        userRepository.save(existingUser);</span>
 <span class="fc" id="L65">        Integer currentUserId = securityUtils.getCurrentUserId();</span>
-<span class="pc bpc" id="L66" title="2 of 4 branches missed.">        if (currentUserId != null &amp;&amp; currentUserId.equals(existingUser.getId())) {</span>
-<span class="nc" id="L67">            securityUtils.logoutCurrentUser(request, response);</span>
+<span class="pc bpc" id="L66" title="1 of 4 branches missed.">        if (currentUserId != null &amp;&amp; currentUserId.equals(existingUser.getId())) {</span>
+<span class="fc" id="L67">            securityUtils.logoutCurrentUser(request, response);</span>
         }
 <span class="fc" id="L69">    }</span>
 
@@ -73,7 +73,7 @@ public class UserService {
     public void delete(Integer id, HttpServletRequest request, HttpServletResponse response) {
 
 <span class="fc" id="L75">        User userToDelete = userRepository.findById(id)</span>
-<span class="pc" id="L76">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid user id: &quot; + id));</span>
+<span class="fc" id="L76">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Invalid user id: &quot; + id));</span>
 
 <span class="fc bfc" id="L78" title="All 2 branches covered.">        if (&quot;ADMIN&quot;.equals(userToDelete.getRole())) {</span>
 <span class="fc" id="L79">            long adminCount = userRepository.countByRole(&quot;ADMIN&quot;);</span>
@@ -84,7 +84,7 @@ public class UserService {
         }
 
 <span class="fc" id="L86">        Integer currentUserId = securityUtils.getCurrentUserId();</span>
-<span class="pc bpc" id="L87" title="1 of 4 branches missed.">        if (currentUserId != null &amp;&amp; currentUserId.equals(userToDelete.getId())) {</span>
+<span class="fc bfc" id="L87" title="All 4 branches covered.">        if (currentUserId != null &amp;&amp; currentUserId.equals(userToDelete.getId())) {</span>
 <span class="fc" id="L88">            securityUtils.logoutCurrentUser(request, response);</span>
         }
 
