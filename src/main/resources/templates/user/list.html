@@ -54,8 +54,7 @@
 					<td th:text="${user.username}"></td>
 					<td style="width: 25%" th:text="${user.role}"></td>
 					<td sec:authorize="isAuthenticated()"
-						th:if="${#authorization.expression('hasAuthority(''ADMIN'')')
-							or #authentication.principal.id == user.id}">
+						th:if="${#authorization.expression('hasAuthority(''ADMIN'')') or #authentication.name == user.username}">
 						<a th:href="@{/user/update/{id}(id=${user.id})}">Edit</a>&nbsp;|&nbsp;
 						<a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
 					</td>

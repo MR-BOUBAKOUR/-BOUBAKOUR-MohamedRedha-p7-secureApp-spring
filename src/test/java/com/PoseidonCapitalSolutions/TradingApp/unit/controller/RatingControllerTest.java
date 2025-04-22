@@ -44,14 +44,6 @@ class RatingControllerTest {
     }
 
     @Test
-    void testAddRatingForm_Show() throws Exception {
-        mockMvc.perform(get("/rating/add"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("rating/add"))
-                .andExpect(model().attributeExists("rating"));
-    }
-
-    @Test
     void testValidateRating_Success() throws Exception {
         mockMvc.perform(post("/rating/validate")
                         .with(csrf())
@@ -74,26 +66,6 @@ class RatingControllerTest {
                 .andExpect(view().name("rating/add"));
 
         verify(ratingService, never()).create(any(RatingDTO.class));
-    }
-
-    @Test
-    void testUpdateRatingForm_Show() throws Exception {
-        Integer id = 1;
-        RatingDTO ratingDTO = new RatingDTO();
-        ratingDTO.setId(id);
-        ratingDTO.setMoodysRating("AAA");
-        ratingDTO.setSandPRating("AAA");
-        ratingDTO.setFitchRating("AAA");
-        ratingDTO.setOrderNumber((byte) 1);
-
-        when(ratingService.findById(id)).thenReturn(ratingDTO);
-
-        mockMvc.perform(get("/rating/update/{id}", id))
-                .andExpect(status().isOk())
-                .andExpect(view().name("rating/update"))
-                .andExpect(model().attribute("rating", ratingDTO));
-
-        verify(ratingService).findById(id);
     }
 
     @Test

@@ -4,6 +4,7 @@ import com.PoseidonCapitalSolutions.TradingApp.dto.RuleNameDTO;
 import com.PoseidonCapitalSolutions.TradingApp.service.RuleNameService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ public class RuleNameController {
         return "ruleName/list";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/add")
     public String addRuleForm(Model model) {
         model.addAttribute("ruleName", new RuleNameDTO());
@@ -41,6 +43,7 @@ public class RuleNameController {
         return "redirect:/ruleName/list";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id,
                                  Model model) {

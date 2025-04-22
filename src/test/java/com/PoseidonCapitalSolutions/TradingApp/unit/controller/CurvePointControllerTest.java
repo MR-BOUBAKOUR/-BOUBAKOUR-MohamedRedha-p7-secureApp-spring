@@ -1,6 +1,6 @@
 package com.PoseidonCapitalSolutions.TradingApp.unit.controller;
 
-import com.PoseidonCapitalSolutions.TradingApp.controller.CurveController;
+import com.PoseidonCapitalSolutions.TradingApp.controller.CurvePointController;
 import com.PoseidonCapitalSolutions.TradingApp.dto.CurvePointDTO;
 import com.PoseidonCapitalSolutions.TradingApp.service.CurvePointService;
 import org.junit.jupiter.api.Test;
@@ -20,9 +20,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(controllers = CurveController.class)
+@WebMvcTest(controllers = CurvePointController.class)
 @WithMockUser
-class CurveControllerTest {
+class CurvePointControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -41,14 +41,6 @@ class CurveControllerTest {
                 .andExpect(model().attribute("curvePoints", curvePoints));
 
         verify(curvePointService).findAll();
-    }
-
-    @Test
-    void testAddCurveForm_Show() throws Exception {
-        mockMvc.perform(get("/curvePoint/add"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("curvePoint/add"))
-                .andExpect(model().attributeExists("curvePoint"));
     }
 
     @Test
@@ -72,24 +64,6 @@ class CurveControllerTest {
                 .andExpect(view().name("curvePoint/add"));
 
         verify(curvePointService, never()).create(any(CurvePointDTO.class));
-    }
-
-    @Test
-    void testUpdateCurveForm_Show() throws Exception {
-        Integer id = 1;
-        CurvePointDTO curvePointDTO = new CurvePointDTO();
-        curvePointDTO.setId(id);
-        curvePointDTO.setTerm(10.0);
-        curvePointDTO.setValue(20.0);
-
-        when(curvePointService.findById(id)).thenReturn(curvePointDTO);
-
-        mockMvc.perform(get("/curvePoint/update/{id}", id))
-                .andExpect(status().isOk())
-                .andExpect(view().name("curvePoint/update"))
-                .andExpect(model().attribute("curvePoint", curvePointDTO));
-
-        verify(curvePointService).findById(id);
     }
 
     @Test

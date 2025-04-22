@@ -48,6 +48,9 @@ public class RuleNameService {
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(Integer id) {
-        ruleNameRepository.deleteById(id);
+        RuleName ruleNameToDelete = ruleNameRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid rule name id: " + id));
+
+        ruleNameRepository.delete(ruleNameToDelete);
     }
 }

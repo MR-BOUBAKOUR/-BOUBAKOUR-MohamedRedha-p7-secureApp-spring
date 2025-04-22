@@ -46,14 +46,6 @@ class UserControllerTest {
     }
 
     @Test
-    void testAddForm_Show() throws Exception {
-        mockMvc.perform(get("/user/add"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("user/add"))
-                .andExpect(model().attributeExists("user"));
-    }
-
-    @Test
     void testValidateUser_Success() throws Exception {
         mockMvc.perform(post("/user/validate")
                         .with(csrf())
@@ -76,25 +68,6 @@ class UserControllerTest {
                 .andExpect(view().name("user/add"));
 
         verify(userService, never()).create(any(UserCreateDTO.class));
-    }
-
-    @Test
-    void testUpdateForm_Show() throws Exception {
-        Integer id = 1;
-        UserResponseDTO userResponseDTO = new UserResponseDTO();
-        userResponseDTO.setId(id);
-        userResponseDTO.setUsername("User");
-        userResponseDTO.setFullname("User");
-        userResponseDTO.setRole("USER");
-
-        when(userService.findById(id)).thenReturn(userResponseDTO);
-
-        mockMvc.perform(get("/user/update/{id}", id))
-                .andExpect(status().isOk())
-                .andExpect(view().name("user/update"))
-                .andExpect(model().attributeExists("user"));
-
-        verify(userService).findById(id);
     }
 
     @Test

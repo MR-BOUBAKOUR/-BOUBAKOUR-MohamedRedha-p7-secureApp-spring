@@ -48,6 +48,9 @@ public class RatingService {
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(Integer id) {
-        ratingRepository.deleteById(id);
+        Rating ratingToDelete = ratingRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid rating id: " + id));
+
+        ratingRepository.delete(ratingToDelete);
     }
 }

@@ -115,8 +115,23 @@ class RatingServiceTest {
 
     @Test
     void delete_success() {
+        Rating ratingToDelete = new Rating();
+
+        when(ratingRepository.findById(id)).thenReturn(Optional.of(ratingToDelete));
+
         ratingService.delete(id);
 
-        verify(ratingRepository).deleteById(id);
+        verify(ratingRepository).delete(ratingToDelete);
     }
+
+    @Test
+    void delete_exception() {
+        when(ratingRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> ratingService.delete(id));
+
+        verify(ratingRepository, never()).delete(any());
+    }
+
+
 }

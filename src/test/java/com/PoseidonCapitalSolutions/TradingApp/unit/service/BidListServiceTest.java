@@ -30,7 +30,6 @@ class BidListServiceTest {
     @InjectMocks
     private BidListService bidListService;
 
-
     private AutoCloseable closeable;
     private Integer id;
 
@@ -121,8 +120,21 @@ class BidListServiceTest {
 
     @Test
     void delete_success() {
+        BidList bidToDelete = new BidList();
+
+        when(bidListRepository.findById(id)).thenReturn(Optional.of(bidToDelete));
+
         bidListService.delete(id);
 
-        verify(bidListRepository).deleteById(id);
+        verify(bidListRepository).delete(bidToDelete);
+    }
+
+    @Test
+    void delete_exception() {
+        when(bidListRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> bidListService.delete(id));
+
+        verify(bidListRepository, never()).delete(any());
     }
 }

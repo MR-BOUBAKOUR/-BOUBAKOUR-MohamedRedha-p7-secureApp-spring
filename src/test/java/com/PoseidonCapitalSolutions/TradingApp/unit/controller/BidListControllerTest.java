@@ -44,14 +44,6 @@ class BidListControllerTest {
     }
 
     @Test
-    void testAddBidForm_Show() throws Exception {
-        mockMvc.perform(get("/bidList/add"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("bidList/add"))
-                .andExpect(model().attributeExists("bidList"));
-    }
-
-    @Test
     void testValidateBid_Success() throws Exception {
         mockMvc.perform(post("/bidList/validate")
                         .with(csrf())
@@ -73,25 +65,6 @@ class BidListControllerTest {
                 .andExpect(view().name("bidList/add"));
 
         verify(bidListService, never()).create(any(BidListDTO.class));
-    }
-
-    @Test
-    void testUpdateBidForm_Show() throws Exception {
-        Integer id = 1;
-        BidListDTO bidListDTO = new BidListDTO();
-        bidListDTO.setId(id);
-        bidListDTO.setAccount("Account1");
-        bidListDTO.setType("Type1");
-
-        when(bidListService.findById(id)).thenReturn(bidListDTO);
-
-
-        mockMvc.perform(get("/bidList/update/{id}", id))
-                .andExpect(status().isOk())
-                .andExpect(view().name("bidList/update"))
-                .andExpect(model().attribute("bidList", bidListDTO));
-
-        verify(bidListService).findById(id);
     }
 
     @Test

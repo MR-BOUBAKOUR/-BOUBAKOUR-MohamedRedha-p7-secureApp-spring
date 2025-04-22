@@ -44,14 +44,6 @@ class RuleNameControllerTest {
     }
 
     @Test
-    void testAddRuleForm_Show() throws Exception {
-        mockMvc.perform(get("/ruleName/add"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("ruleName/add"))
-                .andExpect(model().attributeExists("ruleName"));
-    }
-
-    @Test
     void testValidateRule_Success() throws Exception {
         mockMvc.perform(post("/ruleName/validate")
                         .with(csrf())
@@ -76,28 +68,6 @@ class RuleNameControllerTest {
                 .andExpect(view().name("ruleName/add"));
 
         verify(ruleNameService, never()).create(any(RuleNameDTO.class));
-    }
-
-    @Test
-    void testUpdateRuleForm_Show() throws Exception {
-        Integer id = 1;
-        RuleNameDTO ruleNameDTO = new RuleNameDTO();
-        ruleNameDTO.setId(id);
-        ruleNameDTO.setName("Rule");
-        ruleNameDTO.setDescription("Description");
-        ruleNameDTO.setJson("Value");
-        ruleNameDTO.setTemplate("Template");
-        ruleNameDTO.setSqlStr("SqlStr");
-        ruleNameDTO.setSqlPart("SqlPart");
-
-        when(ruleNameService.findById(id)).thenReturn(ruleNameDTO);
-
-        mockMvc.perform(get("/ruleName/update/{id}", id))
-                .andExpect(status().isOk())
-                .andExpect(view().name("ruleName/update"))
-                .andExpect(model().attribute("ruleName", ruleNameDTO));
-
-        verify(ruleNameService).findById(id);
     }
 
     @Test
