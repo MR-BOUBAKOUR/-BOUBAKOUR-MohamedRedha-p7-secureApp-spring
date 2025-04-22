@@ -27,8 +27,8 @@ All deliverables are generated through the CI/CD pipeline (built at every "Pull 
 - **Use cases handled**:
   - Prevention of the deletion of the last admin account.
   - Logged-in user when updating or deleting his account (logged out).
-  
 
+  
 - **Role-specific functionalities**:
   - **Admin**:
     - Full access to perform any action on any account or entity (CRUD operations).
@@ -36,18 +36,16 @@ All deliverables are generated through the CI/CD pipeline (built at every "Pull 
   - **User**:
     - Can only CRUD their own account (create, read, update, delete).
     - Can create new users but cannot update of delete other users.
-
+   
 
 - Full CRUD functionality for 6 financial entities.
 - Separation between entities, DTOs, and mappers.
-- Integration with the existing Thymeleaf frontend interface.
-- Unit and integration tests with JUnit, TestContainers, and JaCoCo.
-- Code coverage tracking via GitHub Actions CI.
 
 ## 📦 Containerization & CI/CD
 - **Docker**: multi-stage image for optimized execution
 - **docker-compose**: local orchestration (app + DB)
 - **GitHub Actions**:
+  
     - Build, tests & generation of the JaCoCo report (unit + integration)
     - JavaDoc generation
     - Deployment to GitHub Pages for documentation
@@ -55,8 +53,10 @@ All deliverables are generated through the CI/CD pipeline (built at every "Pull 
 
 ## ✅ Run the project locally
 ```bash
+
 git clone https://github.com/MR-BOUBAKOUR/-BOUBAKOUR-MohamedRedha-p7-secureApp-spring.git
 cd -BOUBAKOUR-MohamedRedha-p7-secureApp-spring
 ./mvnw clean install
 docker-compose up --build
+
 ```
