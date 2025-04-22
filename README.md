@@ -36,10 +36,13 @@ All deliverables are generated through the CI/CD pipeline (built at every "Pull 
   - **User**:
     - Can only CRUD their own account (create, read, update, delete).
     - Can create new users but cannot update of delete other users.
-   
+  - **Anonymous**:
+    - Can access the list of registered users.
+    - Can only register a new account.
 
-- Full CRUD functionality for 6 financial entities.
-- Separation between entities, DTOs, and mappers.
+
+- **Full CRUD functionality** for 6 financial entities.
+- **Separation** between entities, DTOs, and mappers.
 
 ## 📦 Containerization & CI/CD
 - **Docker**: multi-stage image for optimized execution
