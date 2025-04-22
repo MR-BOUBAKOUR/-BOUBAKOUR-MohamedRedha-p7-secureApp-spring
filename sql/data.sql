@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS demo;
-CREATE DATABASE demo;
-USE demo;
+DROP DATABASE IF EXISTS trading_app;
+CREATE DATABASE trading_app;
+USE trading_app;
 
 CREATE TABLE bidlist (
      id INT NOT NULL AUTO_INCREMENT,
