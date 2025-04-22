@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The type Trade service.
+ */
 @AllArgsConstructor
 @Service
 public class TradeService {
@@ -19,23 +22,45 @@ public class TradeService {
     private final TradeRepository tradeRepository;
     private final TradeMapper tradeMapper;
 
+    /**
+     * Find by id trade dto.
+     *
+     * @param id the id
+     * @return the trade dto
+     */
     public TradeDTO findById(Integer id) {
         return tradeRepository.findById(id)
                 .map(tradeMapper::toTradeDTO)
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid trade id: " + id));
     }
 
+    /**
+     * Find all list.
+     *
+     * @return the list
+     */
     public List<TradeDTO> findAll() {
         return tradeRepository.findAll().stream()
                 .map(tradeMapper::toTradeDTO)
                 .toList();
     }
 
+    /**
+     * Create.
+     *
+     * @param tradeDTO the trade dto
+     */
     @Transactional
     public void create(TradeDTO tradeDTO) {
         tradeRepository.save(tradeMapper.toTrade(tradeDTO));
     }
 
+    /**
+     * Update.
+     *
+     * @param id              the id
+     * @param updatedTradeDTO the updated trade dto
+     */
     @Transactional
     public void update(Integer id, TradeDTO updatedTradeDTO) {
         Trade existingTrade = tradeRepository.findById(id)
@@ -45,6 +70,11 @@ public class TradeService {
         tradeRepository.save(existingTrade);
     }
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(Integer id) {

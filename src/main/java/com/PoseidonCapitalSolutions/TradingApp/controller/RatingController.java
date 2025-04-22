@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * The type Rating controller.
+ */
 @AllArgsConstructor
 @Controller
 @RequestMapping("/rating")
@@ -17,12 +20,24 @@ public class RatingController {
 
     private final RatingService ratingService;
 
+    /**
+     * Home string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping("/list")
     public String home(Model model) {
         model.addAttribute("ratings", ratingService.findAll());
         return "rating/list";
     }
 
+    /**
+     * Add rating form string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/add")
     public String addRatingForm(Model model) {
@@ -30,6 +45,14 @@ public class RatingController {
         return "rating/add";
     }
 
+    /**
+     * Validate string.
+     *
+     * @param ratingDTO the rating dto
+     * @param result    the result
+     * @param model     the model
+     * @return the string
+     */
     @PostMapping("/validate")
     public String validate(@Valid @ModelAttribute("rating") RatingDTO ratingDTO,
                            BindingResult result,
@@ -43,6 +66,13 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
+    /**
+     * Show update form string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id,
@@ -52,6 +82,15 @@ public class RatingController {
         return "rating/update";
     }
 
+    /**
+     * Update rating string.
+     *
+     * @param id        the id
+     * @param ratingDTO the rating dto
+     * @param result    the result
+     * @param model     the model
+     * @return the string
+     */
     @PostMapping("/update/{id}")
     public String updateRating(@PathVariable("id") Integer id,
                                @Valid @ModelAttribute("rating") RatingDTO ratingDTO,
@@ -65,6 +104,13 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
+    /**
+     * Delete rating string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id,
                                Model model) {

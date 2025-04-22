@@ -14,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * The type User controller.
+ */
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -21,18 +24,37 @@ public class UserController {
 
     private final UserService userService;
 
+    /**
+     * List users string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/list")
     public String listUsers(Model model) {
         model.addAttribute("users", userService.findAll());
         return "user/list";
     }
 
+    /**
+     * Show add form string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("user", new UserCreateDTO());
         return "user/add";
     }
 
+    /**
+     * Validate user string.
+     *
+     * @param userCreateDTO the user create dto
+     * @param result        the result
+     * @return the string
+     */
     @PostMapping("/validate")
     public String validateUser(@Valid @ModelAttribute("user") UserCreateDTO userCreateDTO,
                                BindingResult result) {
@@ -43,6 +65,13 @@ public class UserController {
         return "redirect:/user/list";
     }
 
+    /**
+     * Show update form string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id,
@@ -60,6 +89,17 @@ public class UserController {
         return "user/update";
     }
 
+    /**
+     * Update user string.
+     *
+     * @param id            the id
+     * @param request       the request
+     * @param response      the response
+     * @param userUpdateDTO the user update dto
+     * @param result        the result
+     * @param model         the model
+     * @return the string
+     */
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable("id") Integer id,
                              HttpServletRequest request,
@@ -76,6 +116,14 @@ public class UserController {
         return "redirect:/user/list";
     }
 
+    /**
+     * Delete user string.
+     *
+     * @param id       the id
+     * @param request  the request
+     * @param response the response
+     * @return the string
+     */
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id,
                              HttpServletRequest request,

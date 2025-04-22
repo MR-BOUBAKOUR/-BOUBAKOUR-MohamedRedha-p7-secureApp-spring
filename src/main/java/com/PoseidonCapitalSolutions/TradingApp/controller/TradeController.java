@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * The type Trade controller.
+ */
 @AllArgsConstructor
 @Controller
 @RequestMapping("/trade")
@@ -17,12 +20,24 @@ public class TradeController {
 
     private final TradeService tradeService;
 
+    /**
+     * Home string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping("/list")
     public String home(Model model) {
         model.addAttribute("trades", tradeService.findAll());
         return "trade/list";
     }
 
+    /**
+     * Add trade form string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/add")
     public String addTradeForm(Model model) {
@@ -30,6 +45,14 @@ public class TradeController {
         return "trade/add";
     }
 
+    /**
+     * Validate string.
+     *
+     * @param tradeDTO the trade dto
+     * @param result   the result
+     * @param model    the model
+     * @return the string
+     */
     @PostMapping("/validate")
     public String validate(@Valid @ModelAttribute("trade") TradeDTO tradeDTO,
                            BindingResult result,
@@ -43,6 +66,13 @@ public class TradeController {
         return "redirect:/trade/list";
     }
 
+    /**
+     * Show update form string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id,
@@ -52,6 +82,15 @@ public class TradeController {
         return "trade/update";
     }
 
+    /**
+     * Update trade string.
+     *
+     * @param id       the id
+     * @param tradeDTO the trade dto
+     * @param result   the result
+     * @param model    the model
+     * @return the string
+     */
     @PostMapping("/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id,
                               @Valid @ModelAttribute("trade") TradeDTO tradeDTO,
@@ -65,6 +104,13 @@ public class TradeController {
         return "redirect:/trade/list";
     }
 
+    /**
+     * Delete trade string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id,
                               Model model) {

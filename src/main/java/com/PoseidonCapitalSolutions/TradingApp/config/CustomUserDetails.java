@@ -9,6 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * The type Custom user details.
+ */
 @Getter
 public class CustomUserDetails implements UserDetails {
 
@@ -17,6 +20,11 @@ public class CustomUserDetails implements UserDetails {
     private final String password;
     private final String role;
 
+    /**
+     * Instantiates a new Custom user details.
+     *
+     * @param user the user
+     */
     public CustomUserDetails(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
