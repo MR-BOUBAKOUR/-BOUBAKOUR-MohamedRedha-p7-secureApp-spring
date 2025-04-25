@@ -1,11 +1,11 @@
-name: TradingApp CI - Dev (light)
+name: TradingApp CI - Pull Request (unit & integration tests)
 
 on:
-  push:
-    branches: [ dev ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,5 +18,5 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven and Run Unit Tests
-        run: mvn -B test --file pom.xml
+      - name: Build and Test (unit & integration)
+        run: mvn -B verify --file pom.xml
