@@ -1,14 +1,13 @@
-name: TradingApp CI/CD - PR to main (heavy)
+name: TradingApp CD - Deploy after PR merge (unit & integration tests, reports, deployment)
 
 on:
   pull_request:
-    branches: [ main ]
-
-env:
-  DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DB_NAME }}
+    types: [closed]
+    branches: [main]
 
 jobs:
   build-and-deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
