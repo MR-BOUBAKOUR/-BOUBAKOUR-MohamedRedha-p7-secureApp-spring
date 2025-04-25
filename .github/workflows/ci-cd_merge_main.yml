@@ -5,6 +5,9 @@ on:
     types: [closed]
     branches: [main]
 
+env:
+  DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DB_NAME }}
+
 jobs:
   build-and-deploy:
     if: github.event.pull_request.merged == true
