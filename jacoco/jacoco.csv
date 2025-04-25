@@ -4,8 +4,8 @@ TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,RuleNameController
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,CustomErrorController,2,3,0,0,1,1,1,1,1,1
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,BidListController,21,50,0,4,5,14,2,6,2,4
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,RatingController,21,45,0,4,5,13,2,6,2,4
-TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,UserController,9,79,0,4,2,21,1,7,1,5
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,LoginController,9,0,4,0,3,0,3,0,1,0
+TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,UserController,9,79,0,4,2,21,1,7,1,5
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,CurvePointController,21,45,0,4,5,13,2,6,2,4
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.controller,HomeController,11,3,4,0,4,1,4,1,2,1
 TradingApp,com.PoseidonCapitalSolutions.TradingApp.service,BidListService,0,90,0,0,0,17,0,8,0,8
