@@ -124,6 +124,7 @@ public class UserController {
      * @param response the response
      * @return the string
      */
+    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id,
                              HttpServletRequest request,

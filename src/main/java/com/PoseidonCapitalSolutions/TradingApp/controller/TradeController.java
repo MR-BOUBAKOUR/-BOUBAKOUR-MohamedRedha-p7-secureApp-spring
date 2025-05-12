@@ -38,7 +38,6 @@ public class TradeController {
      * @param model the model
      * @return the string
      */
-    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/add")
     public String addTradeForm(Model model) {
         model.addAttribute("trade", new TradeDTO());
@@ -73,7 +72,6 @@ public class TradeController {
      * @param model the model
      * @return the string
      */
-    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id,
                                  Model model) {

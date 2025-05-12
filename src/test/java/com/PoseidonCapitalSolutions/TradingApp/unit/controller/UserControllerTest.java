@@ -100,8 +100,8 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
-    void testDeleteUser() throws Exception {
+    @WithMockUser(authorities = "ADMIN", username = "admin")
+    void testDeleteUser_Success() throws Exception {
         Integer id = 1;
 
         mockMvc.perform(get("/user/delete/{id}", id))
