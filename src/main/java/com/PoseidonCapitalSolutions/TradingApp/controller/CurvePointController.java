@@ -38,7 +38,6 @@ public class CurvePointController {
      * @param model the model
      * @return the string
      */
-    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/add")
     public String addCurveForm(Model model) {
         model.addAttribute("curvePoint", new CurvePointDTO());
@@ -73,7 +72,6 @@ public class CurvePointController {
      * @param model the model
      * @return the string
      */
-    @PreAuthorize("hasAuthority('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         CurvePointDTO curvePointDTO = curvePointService.findById(id);

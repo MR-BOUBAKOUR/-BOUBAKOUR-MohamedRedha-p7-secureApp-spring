@@ -48,7 +48,8 @@ class TradeControllerTest {
         mockMvc.perform(post("/trade/validate")
                         .with(csrf())
                         .param("account", "Account1")
-                        .param("type", "Type1"))
+                        .param("type", "Type1")
+                        .param("buyQuantity", "100.1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/trade/list"));
 
@@ -73,7 +74,8 @@ class TradeControllerTest {
         mockMvc.perform(post("/trade/update/{id}", id)
                         .with(csrf())
                         .param("account", "UpdatedAccount")
-                        .param("type", "UpdatedType"))
+                        .param("type", "UpdatedType")
+                        .param("buyQuantity", "100.0"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/trade/list"));
 

@@ -22,5 +22,6 @@ public class RatingDTO {
     @Size(max = 125, message = "Fitch rating must not exceed 125 characters")
     private String fitchRating;
 
+    @NotNull(message = "Order number is mandatory")
     private Byte orderNumber;
 }

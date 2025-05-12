@@ -19,6 +19,7 @@ public class BidListDTO {
     @Size(max = 30, message = "Type must not exceed 30 characters")
     private String type;
 
+    @NotNull(message = "BidQuantity is mandatory")
     private Double bidQuantity;
 
 }

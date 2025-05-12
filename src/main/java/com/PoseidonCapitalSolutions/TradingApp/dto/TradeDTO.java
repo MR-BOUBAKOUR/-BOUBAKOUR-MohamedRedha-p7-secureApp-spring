@@ -18,6 +18,7 @@ public class TradeDTO {
     @Size(max = 30, message = "Type must not exceed 30 characters")
     private String type;
 
+    @NotNull(message = "BuyQuantity is mandatory")
     private Double buyQuantity;
 
 }
