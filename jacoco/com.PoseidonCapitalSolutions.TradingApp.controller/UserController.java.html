@@ -124,12 +124,13 @@ public class UserController {
      * @param response the response
      * @return the string
      */
+    @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/delete/{id}&quot;)
     public String deleteUser(@PathVariable(&quot;id&quot;) Integer id,
                              HttpServletRequest request,
                              HttpServletResponse response) {
-<span class="fc" id="L131">        userService.delete(id, request, response);</span>
-<span class="fc" id="L132">        return &quot;redirect:/user/list&quot;;</span>
+<span class="fc" id="L132">        userService.delete(id, request, response);</span>
+<span class="fc" id="L133">        return &quot;redirect:/user/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

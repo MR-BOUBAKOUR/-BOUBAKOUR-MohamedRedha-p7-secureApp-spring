@@ -38,11 +38,10 @@ public class CurvePointController {
      * @param model the model
      * @return the string
      */
-    @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/add&quot;)
     public String addCurveForm(Model model) {
-<span class="nc" id="L44">        model.addAttribute(&quot;curvePoint&quot;, new CurvePointDTO());</span>
-<span class="nc" id="L45">        return &quot;curvePoint/add&quot;;</span>
+<span class="nc" id="L43">        model.addAttribute(&quot;curvePoint&quot;, new CurvePointDTO());</span>
+<span class="nc" id="L44">        return &quot;curvePoint/add&quot;;</span>
     }
 
     /**
@@ -57,13 +56,13 @@ public class CurvePointController {
     public String validate(@Valid @ModelAttribute(&quot;curvePoint&quot;) CurvePointDTO curvePointDTO,
                            BindingResult result,
                            Model model) {
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L61">            return &quot;curvePoint/add&quot;;</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L60">            return &quot;curvePoint/add&quot;;</span>
         }
 
-<span class="fc" id="L64">        curvePointService.create(curvePointDTO);</span>
-<span class="fc" id="L65">        model.addAttribute(&quot;curvePoints&quot;, curvePointService.findAll());</span>
-<span class="fc" id="L66">        return &quot;redirect:/curvePoint/list&quot;;</span>
+<span class="fc" id="L63">        curvePointService.create(curvePointDTO);</span>
+<span class="fc" id="L64">        model.addAttribute(&quot;curvePoints&quot;, curvePointService.findAll());</span>
+<span class="fc" id="L65">        return &quot;redirect:/curvePoint/list&quot;;</span>
     }
 
     /**
@@ -73,12 +72,11 @@ public class CurvePointController {
      * @param model the model
      * @return the string
      */
-    @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L79">        CurvePointDTO curvePointDTO = curvePointService.findById(id);</span>
-<span class="nc" id="L80">        model.addAttribute(&quot;curvePoint&quot;, curvePointDTO);</span>
-<span class="nc" id="L81">        return &quot;curvePoint/update&quot;;</span>
+<span class="nc" id="L77">        CurvePointDTO curvePointDTO = curvePointService.findById(id);</span>
+<span class="nc" id="L78">        model.addAttribute(&quot;curvePoint&quot;, curvePointDTO);</span>
+<span class="nc" id="L79">        return &quot;curvePoint/update&quot;;</span>
     }
 
     /**
@@ -95,12 +93,12 @@ public class CurvePointController {
                               @Valid @ModelAttribute(&quot;curvePoint&quot;) CurvePointDTO curvePointDTO,
                               BindingResult result,
                               Model model) {
-<span class="fc bfc" id="L98" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L99">            return &quot;curvePoint/update&quot;;</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L97">            return &quot;curvePoint/update&quot;;</span>
         }
 
-<span class="fc" id="L102">        curvePointService.update(id, curvePointDTO);</span>
-<span class="fc" id="L103">        return &quot;redirect:/curvePoint/list&quot;;</span>
+<span class="fc" id="L100">        curvePointService.update(id, curvePointDTO);</span>
+<span class="fc" id="L101">        return &quot;redirect:/curvePoint/list&quot;;</span>
     }
 
     /**
@@ -112,8 +110,8 @@ public class CurvePointController {
      */
     @GetMapping(&quot;/delete/{id}&quot;)
     public String deleteCurve(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="fc" id="L115">        curvePointService.delete(id);</span>
-<span class="fc" id="L116">        return &quot;redirect:/curvePoint/list&quot;;</span>
+<span class="fc" id="L113">        curvePointService.delete(id);</span>
+<span class="fc" id="L114">        return &quot;redirect:/curvePoint/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

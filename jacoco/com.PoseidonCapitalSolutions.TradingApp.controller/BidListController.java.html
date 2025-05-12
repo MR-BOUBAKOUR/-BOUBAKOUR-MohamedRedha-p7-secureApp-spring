@@ -41,11 +41,10 @@ public class BidListController {
      * @param model the model
      * @return the string
      */
-    @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/add&quot;)
     public String addBidForm(Model model) {
-<span class="nc" id="L47">        model.addAttribute(&quot;bidList&quot;, new BidListDTO());</span>
-<span class="nc" id="L48">        return &quot;bidList/add&quot;;</span>
+<span class="nc" id="L46">        model.addAttribute(&quot;bidList&quot;, new BidListDTO());</span>
+<span class="nc" id="L47">        return &quot;bidList/add&quot;;</span>
     }
 
     /**
@@ -60,13 +59,13 @@ public class BidListController {
     public String validate(@Valid @ModelAttribute(&quot;bidList&quot;) BidListDTO bidListDTO,
                            BindingResult result,
                            Model model) {
-<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L64">            return &quot;bidList/add&quot;;</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L63">            return &quot;bidList/add&quot;;</span>
         }
 
-<span class="fc" id="L67">        bidListService.create(bidListDTO);</span>
-<span class="fc" id="L68">        model.addAttribute(&quot;bidLists&quot;, bidListService.findAll());</span>
-<span class="fc" id="L69">        return &quot;redirect:/bidList/list&quot;;</span>
+<span class="fc" id="L66">        bidListService.create(bidListDTO);</span>
+<span class="fc" id="L67">        model.addAttribute(&quot;bidLists&quot;, bidListService.findAll());</span>
+<span class="fc" id="L68">        return &quot;redirect:/bidList/list&quot;;</span>
     }
 
     /**
@@ -76,13 +75,12 @@ public class BidListController {
      * @param model the model
      * @return the string
      */
-    @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id,
                                  Model model) {
-<span class="nc" id="L83">        BidListDTO bidListDTO = bidListService.findById(id);</span>
-<span class="nc" id="L84">        model.addAttribute(&quot;bidList&quot;, bidListDTO);</span>
-<span class="nc" id="L85">        return &quot;bidList/update&quot;;</span>
+<span class="nc" id="L81">        BidListDTO bidListDTO = bidListService.findById(id);</span>
+<span class="nc" id="L82">        model.addAttribute(&quot;bidList&quot;, bidListDTO);</span>
+<span class="nc" id="L83">        return &quot;bidList/update&quot;;</span>
     }
 
     /**
@@ -99,12 +97,12 @@ public class BidListController {
                             @Valid BidListDTO bidListDTO,
                             BindingResult result,
                             Model model) {
-<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L103">            model.addAttribute(&quot;bidList&quot;, bidListDTO);</span>
-<span class="fc" id="L104">            return &quot;bidList/update&quot;;</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L101">            model.addAttribute(&quot;bidList&quot;, bidListDTO);</span>
+<span class="fc" id="L102">            return &quot;bidList/update&quot;;</span>
         }
-<span class="fc" id="L106">        bidListService.update(id, bidListDTO);</span>
-<span class="fc" id="L107">        return &quot;redirect:/bidList/list&quot;;</span>
+<span class="fc" id="L104">        bidListService.update(id, bidListDTO);</span>
+<span class="fc" id="L105">        return &quot;redirect:/bidList/list&quot;;</span>
     }
 
     /**
@@ -118,8 +116,8 @@ public class BidListController {
     public String deleteBid(@PathVariable(&quot;id&quot;)
                             Integer id,
                             Model model) {
-<span class="fc" id="L121">        bidListService.delete(id);</span>
-<span class="fc" id="L122">        return &quot;redirect:/bidList/list&quot;;</span>
+<span class="fc" id="L119">        bidListService.delete(id);</span>
+<span class="fc" id="L120">        return &quot;redirect:/bidList/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

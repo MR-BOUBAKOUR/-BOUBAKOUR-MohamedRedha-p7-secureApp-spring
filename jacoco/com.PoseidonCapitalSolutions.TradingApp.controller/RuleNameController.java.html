@@ -38,11 +38,10 @@ public class RuleNameController {
      * @param model the model
      * @return the string
      */
-    @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/add&quot;)
     public String addRuleForm(Model model) {
-<span class="nc" id="L44">        model.addAttribute(&quot;ruleName&quot;, new RuleNameDTO());</span>
-<span class="nc" id="L45">        return &quot;ruleName/add&quot;;</span>
+<span class="nc" id="L43">        model.addAttribute(&quot;ruleName&quot;, new RuleNameDTO());</span>
+<span class="nc" id="L44">        return &quot;ruleName/add&quot;;</span>
     }
 
     /**
@@ -57,13 +56,13 @@ public class RuleNameController {
     public String validate(@Valid @ModelAttribute(&quot;ruleName&quot;) RuleNameDTO ruleNameDTO,
                            BindingResult result,
                            Model model) {
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L61">            return &quot;ruleName/add&quot;;</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L60">            return &quot;ruleName/add&quot;;</span>
         }
 
-<span class="fc" id="L64">        ruleNameService.create(ruleNameDTO);</span>
-<span class="fc" id="L65">        model.addAttribute(&quot;ruleNames&quot;, ruleNameService.findAll());</span>
-<span class="fc" id="L66">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L63">        ruleNameService.create(ruleNameDTO);</span>
+<span class="fc" id="L64">        model.addAttribute(&quot;ruleNames&quot;, ruleNameService.findAll());</span>
+<span class="fc" id="L65">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 
     /**
@@ -73,13 +72,12 @@ public class RuleNameController {
      * @param model the model
      * @return the string
      */
-    @PreAuthorize(&quot;hasAuthority('ADMIN') or #id == authentication.principal.id&quot;)
     @GetMapping(&quot;/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id,
                                  Model model) {
-<span class="nc" id="L80">        RuleNameDTO ruleNameDTO = ruleNameService.findById(id);</span>
-<span class="nc" id="L81">        model.addAttribute(&quot;ruleName&quot;, ruleNameDTO);</span>
-<span class="nc" id="L82">        return &quot;ruleName/update&quot;;</span>
+<span class="nc" id="L78">        RuleNameDTO ruleNameDTO = ruleNameService.findById(id);</span>
+<span class="nc" id="L79">        model.addAttribute(&quot;ruleName&quot;, ruleNameDTO);</span>
+<span class="nc" id="L80">        return &quot;ruleName/update&quot;;</span>
     }
 
     /**
@@ -96,12 +94,12 @@ public class RuleNameController {
                                  @Valid @ModelAttribute(&quot;ruleName&quot;) RuleNameDTO ruleNameDTO,
                                  BindingResult result,
                                  Model model) {
-<span class="fc bfc" id="L99" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L100">            return &quot;ruleName/update&quot;;</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L98">            return &quot;ruleName/update&quot;;</span>
         }
 
-<span class="fc" id="L103">        ruleNameService.update(id, ruleNameDTO);</span>
-<span class="fc" id="L104">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L101">        ruleNameService.update(id, ruleNameDTO);</span>
+<span class="fc" id="L102">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 
     /**
@@ -114,8 +112,8 @@ public class RuleNameController {
     @GetMapping(&quot;/delete/{id}&quot;)
     public String deleteRuleName(@PathVariable(&quot;id&quot;) Integer id,
                                  Model model) {
-<span class="fc" id="L117">        ruleNameService.delete(id);</span>
-<span class="fc" id="L118">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L115">        ruleNameService.delete(id);</span>
+<span class="fc" id="L116">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
