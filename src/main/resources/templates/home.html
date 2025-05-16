@@ -19,8 +19,8 @@
                 <a href="/user/list" class="btn btn-secondary w-100">User Management</a>
             </p>
         </div>
-        <div th:if="${param.logout}">
-            <p style="color: green;" th:text="Bye"></p>
+        <div th:if="${param.logout}" class="text-center">
+            <p style="color: green;" th:text="'You have been successfully logged out.'"></p>
         </div>
     </div>
 </div>
